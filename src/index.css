@@ -3,3 +3,17 @@ body {
   color: white;
   font-family: "Pirata One", sans-serif;
 }
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+@font-face {
+  font-family: "FontOne";
+  src: local("FontOne"), url("/public/fonts/font-1.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "FontTwo";
+  src: local("FontTwo"), url("/public/fonts/font-2.woff2") format("woff2");
+}

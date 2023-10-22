@@ -1,0 +1,16 @@
+.logoName {
+  font-family: "FontTwo", cursive;
+  color: white;
+  font-size: 40px;
+  text-decoration: none;
+  letter-spacing: 2px;
+}
+
+.navigation_elements {
+  padding-left: 50%;
+  font-family: "FontOne", sans-serif;
+}
+
+li:hover {
+  color: rgba(240, 255, 255, 0.552);
+}
