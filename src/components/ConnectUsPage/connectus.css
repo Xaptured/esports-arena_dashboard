@@ -1,0 +1,9 @@
+.connectus-container {
+  width: 100%;
+  height: auto;
+  min-height: 60vh;
+  background-image: url(/public/assets/bg-5.1_part-2.jpg);
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: contain;
+}
