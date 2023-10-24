@@ -67,8 +67,10 @@ export default function ConnectUs() {
                                 <span>
                                     <div className="acknowledge">
                                         <label>
-                                            <input type="checkbox" />
-                                            I acknowledge the terms and conditions
+                                            <input type="radio" name='client-role' id='organizer' />
+                                            <label htmlFor='organizer'>ORGANIZER</label>
+                                            <input type="radio" name='client-role' id='participant' />
+                                            <label htmlFor='participant'>PARTICIPANT</label>
                                         </label>
                                     </div>
                                 </span>
