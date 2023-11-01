@@ -224,3 +224,10 @@ h1.login-register-container {
   /* TODO: should use this space to show messages to the user */
   margin-bottom: 7%;
 }
+
+.message {
+  display: flex;
+  justify-content: center;
+  color: gray;
+  font-size: 14px;
+}
