@@ -1,4 +1,4 @@
-export default {
+const backendService = {
     async saveCredentials(credentials) {
         try {
             const result = await fetch('http://localhost:8086/identity/register', {
@@ -35,3 +35,5 @@ export default {
         }
     },
 }
+
+export default backendService;

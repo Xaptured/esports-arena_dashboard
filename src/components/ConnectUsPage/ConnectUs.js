@@ -201,10 +201,15 @@ export default function ConnectUs() {
                                     </div>
                                 </span>
                             </div>
-                            <button type="submit" className='btn btn-outline-light button_login' disabled={disabled}>
-                                <span className='register-button'>Register</span>
-                                <span className='login-button'>Login</span>
-                            </button>
+                            {
+                                isLoading ?
+                                    <div>Loading...</div>
+                                    :
+                                    <button type="submit" className='btn btn-outline-light button_login' disabled={disabled}>
+                                        <span className='register-button'>Register</span>
+                                        <span className='login-button'>Login</span>
+                                    </button>
+                            }
                             <div className="register-link">
                                 {
                                     isRegistration ?
