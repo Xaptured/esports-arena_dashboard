@@ -4,7 +4,6 @@ import React from 'react'
 export default function PartnersPage() {
     return (
         <div className='container partnerspage-container'>
-            Partners Page
         </div>
     )
 }

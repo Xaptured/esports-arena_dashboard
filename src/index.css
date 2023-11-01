@@ -2,6 +2,7 @@ body {
   background-color: black;
   color: white;
   font-family: "Pirata One", sans-serif;
+  cursor: default;
 }
 
 body::-webkit-scrollbar {
