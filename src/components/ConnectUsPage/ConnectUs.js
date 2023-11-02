@@ -15,7 +15,9 @@ export default function ConnectUs() {
     const [credentials, setCredentials] = useState(initialCredentials);
     const [isLoading, setLoading] = useState(false); // TODO: Utilitze this field while using loader
     const [disabled, setDisabled] = useState(false);
-    const [message, setMessage] = useState('Join our community for the exciting journey');
+    // TODO: set message based on isRegistration flag - THINK
+    const [registerMessage, setRegisterMessage] = useState('Join our community for the exciting journey');
+    const [loginMessage, setLoginMessage] = useState('Login for the exciting jopurney');
 
     // used to do transitions from login to registration page
     const switchToRegistration = () => {
@@ -91,25 +93,25 @@ export default function ConnectUs() {
             setCredentials(newCredentialObject);
             setDisabled(false);
             if (emailResult.message === 'Mail Sent Successfully') {
-                setMessage('Email Sent! Please verify your email');
+                setRegisterMessage('Email Sent! Please verify your email');
                 setTimeout(() => {
-                    setMessage('Thanks for joining our community');
+                    setRegisterMessage('Thanks for joining our community');
                 }, 3000);
             } else {
-                setMessage('Error occurred. Please try again later!');
+                setRegisterMessage('Error occurred. Please try again later!');
                 setTimeout(() => {
-                    setMessage('Join our community for the exciting journey');
+                    setRegisterMessage('Join our community for the exciting journey');
                 }, 5000);
             }
         } else {
-            setMessage('Error occurred. Please try again later!');
+            setRegisterMessage('Error occurred. Please try again later!');
             setTimeout(() => {
-                setMessage('Join our community for the exciting journey');
+                setRegisterMessage('Join our community for the exciting journey');
             }, 5000);
         }
     }
 
-    const handleLogin = (event) => {
+    const handleLogin = async (event) => {
         event.preventDefault();
         const credentialObject = {
             email: credentials.email,
@@ -118,7 +120,22 @@ export default function ConnectUs() {
             verified: credentials.verified,
             message: credentials.message,
         }
-        console.log("Credential Objectcfrom login: ", credentialObject);
+        const result = await backendService.validateCredentials(credentialObject);
+        if (result.message === 'Please verify your account') {
+            setLoginMessage('Please verify your account');
+        } else if (result.message === 'Invalid access') {
+            setLoginMessage('Invalid access');
+        } else {
+            if (result.role === 'PARTICIPANT') {
+                setLoginMessage('Logged in as PARTICIPANT');
+            }
+            else if (result.role === 'ORGANIZER') {
+                setLoginMessage('Logged in as ORGANIZER');
+            }
+            else {
+                setLoginMessage('Logged in as ADMIN');
+            }
+        }
     }
 
     const handleInputChangeEmail = (e) => {
@@ -218,7 +235,13 @@ export default function ConnectUs() {
                                         <p>Dont have an account? <label onClick={switchToRegistration}>Register</label></p>
                                 }
                             </div>
-                            <div className='message'>{message}</div>
+                            {
+                                isRegistration ?
+                                    <div className='message'>{registerMessage}</div>
+                                    :
+                                    <div className='message'>{loginMessage}</div>
+                            }
+
                         </form>
                     </div>
                 </div>
