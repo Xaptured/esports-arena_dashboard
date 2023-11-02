@@ -34,6 +34,24 @@ const backendService = {
             console.log("Error whilesending verification email", error);
         }
     },
+
+    async validateCredentials(credentials) {
+        try {
+            const result = await fetch('http://localhost:8086/identity/token', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(credentials)
+            });
+
+            const jsonResult = await result.json();
+
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while validating credential data", error);
+        }
+    },
 }
 
 export default backendService;
