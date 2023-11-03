@@ -10,14 +10,25 @@ export default function ConnectUs() {
         role: 'PARTICIPANT',
         verified: false,
         message: '',
-    }
+    };
+
+    const initialComments = {
+        email: '',
+        comments: '',
+        replied: false,
+        message: '',
+    };
+
     const [isRegistration, setRegistration] = useState(false);
     const [credentials, setCredentials] = useState(initialCredentials);
-    const [isLoading, setLoading] = useState(false); // TODO: Utilitze this field while using loader
+    const [comments, setComments] = useState(initialComments);
+    const [isLoading, setLoading] = useState(false);
+    const [isLoadingComments, setLoadingComments] = useState(false);
     const [disabled, setDisabled] = useState(false);
-    // TODO: set message based on isRegistration flag - THINK
+    const [disabledComments, setDisabledComments] = useState(false);
     const [registerMessage, setRegisterMessage] = useState('Join our community for the exciting journey');
     const [loginMessage, setLoginMessage] = useState('Login for the exciting jopurney');
+    const [commentsMessage, setCommentsMessage] = useState('Reach out to us for any concerns');
 
     // used to do transitions from login to registration page
     const switchToRegistration = () => {
@@ -69,14 +80,7 @@ export default function ConnectUs() {
         event.preventDefault();
         setLoading(true);
         setDisabled(true);
-        const credentialObject = {
-            email: credentials.email,
-            password: credentials.password,
-            role: credentials.role,
-            verified: credentials.verified,
-            message: credentials.message,
-        }
-        const result = await backendService.saveCredentials(credentialObject);
+        const result = await backendService.saveCredentials(credentials);
         if (result.message === 'Request Processed') {
             const emailRequest = {
                 clientEmail: result.email,
@@ -113,14 +117,7 @@ export default function ConnectUs() {
 
     const handleLogin = async (event) => {
         event.preventDefault();
-        const credentialObject = {
-            email: credentials.email,
-            password: credentials.password,
-            role: credentials.role,
-            verified: credentials.verified,
-            message: credentials.message,
-        }
-        const result = await backendService.validateCredentials(credentialObject);
+        const result = await backendService.validateCredentials(credentials);
         if (result.message === 'Please verify your account') {
             setLoginMessage('Please verify your account');
         } else if (result.message === 'Invalid access') {
@@ -135,6 +132,39 @@ export default function ConnectUs() {
             else {
                 setLoginMessage('Logged in as ADMIN');
             }
+        }
+    }
+
+    const handleSubmitComments = async (event) => {
+        event.preventDefault();
+        setLoadingComments(true);
+        const result = await backendService.getCommentsData(comments);
+        setLoadingComments(false);
+        if (result.message === 'Request Processed') {
+            const newCommentObject = {
+                email: '',
+                comments: ''
+            };
+            setComments(newCommentObject);
+            setDisabledComments(true);
+            setCommentsMessage('Email sent successfully');
+            setTimeout(() => {
+                setCommentsMessage('Thanks for reaching us');
+                setDisabledComments(false);
+            }, 3000);
+
+        } else {
+            const newCommentObject = {
+                email: '',
+                comments: ''
+            };
+            setComments(newCommentObject);
+            setDisabledComments(true);
+            setCommentsMessage('Error occurred. Please try again later.');
+            setTimeout(() => {
+                setCommentsMessage('Thanks for your patience');
+                setDisabledComments(false);
+            }, 3000);
         }
     }
 
@@ -154,6 +184,18 @@ export default function ConnectUs() {
         const newCredentialObject = { ...credentials };
         newCredentialObject.role = e.target.value;
         setCredentials(newCredentialObject);
+    };
+
+    const handleInputChangeEmailComments = (e) => {
+        const newCommentsObject = { ...comments };
+        newCommentsObject.email = e.target.value;
+        setComments(newCommentsObject);
+    };
+
+    const handleInputChangeComments = (e) => {
+        const newCommentsObject = { ...comments };
+        newCommentsObject.comments = e.target.value;
+        setComments(newCommentsObject);
     };
 
     return (
@@ -248,19 +290,42 @@ export default function ConnectUs() {
                 {/* Wrapper for contact us form */}
                 <div className="wrapper">
                     <div className="form-box">
-                        <form>
+                        <form onSubmit={handleSubmitComments}>
                             <h1>Contact us</h1>
                             <div className='mb-3 input-box'>
-                                <input type="email" placeholder="email" required />
+                                <input
+                                    type="email"
+                                    placeholder="email"
+                                    value={comments.email}
+                                    onChange={handleInputChangeEmailComments}
+                                    required />
                                 <i className='bx bxs-user'></i>
                             </div>
                             <div className='mb-3 input-box'>
-                                <textarea placeholder="write your comment" required></textarea>
+                                <textarea
+                                    placeholder="write your comment"
+                                    value={comments.comments}
+                                    onChange={handleInputChangeComments}
+                                    required></textarea>
                                 <i className='bx bxs-user'></i>
                             </div>
-                            <button type="button" className='btn btn-outline-light button_submit'>
-                                Submit
-                            </button>
+                            {
+                                isLoadingComments ?
+                                    <div>
+                                        Loading...
+                                    </div>
+                                    :
+                                    <div>
+                                        <button type="submit" className='btn btn-outline-light button_submit' disabled={disabledComments}>
+                                            Submit
+                                        </button>
+                                        <div className='message'>
+                                            {
+                                                commentsMessage
+                                            }
+                                        </div>
+                                    </div>
+                            }
                         </form>
                     </div>
                 </div>

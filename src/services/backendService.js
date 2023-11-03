@@ -52,6 +52,24 @@ const backendService = {
             console.log("Error while validating credential data", error);
         }
     },
+
+    async getCommentsData(commentObject) {
+        try {
+            const result = await fetch('http://localhost:8086/comments/save-comments', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(commentObject)
+            });
+
+            const jsonResult = await result.json();
+
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while posting Comments data", error);
+        }
+    },
 }
 
 export default backendService;
