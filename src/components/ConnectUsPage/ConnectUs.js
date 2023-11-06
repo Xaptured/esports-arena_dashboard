@@ -153,7 +153,22 @@ export default function ConnectUs() {
                 setDisabledComments(false);
             }, 3000);
 
-        } else {
+        }
+        else if (result.message === 'Error sending an email') {
+            const newCommentObject = {
+                email: '',
+                comments: ''
+            };
+            setComments(newCommentObject);
+            setDisabledComments(true);
+            setCommentsMessage('Will send you an email shortly');
+            setTimeout(() => {
+                setCommentsMessage('Thanks for reaching us');
+                setDisabledComments(false);
+            }, 3000);
+
+        }
+        else {
             const newCommentObject = {
                 email: '',
                 comments: ''
