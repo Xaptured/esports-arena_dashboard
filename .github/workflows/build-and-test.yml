@@ -2,17 +2,17 @@ name: Build and Test React Application
 
 on:
   push:
-    branches:    
+    branches:
       - main
-      - 'ESA**'
+      - "ESA**"
   pull_request:
-    branches:    
+    branches:
       - main
-      - 'ESA**'
+      - "ESA**"
 
 jobs:
   build:
-
+    name: building-and-testing-application
     runs-on: ubuntu-latest
 
     strategy:
@@ -20,19 +20,19 @@ jobs:
         node-version: [19.x]
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Run the tests
-      run: npm test
+      - name: Run the tests
+        run: npm test
 
-    - name: Build
-      run: npm run build
+      - name: Build
+        run: npm run build
