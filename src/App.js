@@ -1,5 +1,5 @@
 import './App.css';
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import LandingPage from './pages/LandingPage';
 import ParticipantHomePage from './pages/ParticipantHomePage';
