@@ -2,7 +2,9 @@ import backendService from '../../services/backendService';
 import './connectus.css'
 import React, { useState } from 'react'
 
-export default function ConnectUs() {
+export default function ConnectUs(props) {
+
+    const { loggedInProp } = props;
 
     const initialCredentials = {
         email: '',
@@ -125,12 +127,30 @@ export default function ConnectUs() {
         } else {
             if (result.role === 'PARTICIPANT') {
                 setLoginMessage('Logged in as PARTICIPANT');
+                const participant = {
+                    isParticipantLogin: true,
+                    isAdminLogin: false,
+                    isOrganizerLogin: false,
+                }
+                loggedInProp(participant);
             }
             else if (result.role === 'ORGANIZER') {
                 setLoginMessage('Logged in as ORGANIZER');
+                const organizer = {
+                    isParticipantLogin: false,
+                    isAdminLogin: false,
+                    isOrganizerLogin: true,
+                }
+                loggedInProp(organizer);
             }
             else {
                 setLoginMessage('Logged in as ADMIN');
+                const admin = {
+                    isParticipantLogin: false,
+                    isAdminLogin: true,
+                    isOrganizerLogin: false,
+                }
+                loggedInProp(admin);
             }
         }
     }
