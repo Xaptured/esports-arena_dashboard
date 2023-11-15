@@ -4,7 +4,7 @@ import LandingComponent from '../components/Landing/LandingComponent'
 import PartnersComponent from '../components/Partners/PartnersComponent'
 import YourPlaceComponent from '../components/YourPlace/YourPlaceComponent'
 
-export default function LandingPage() {
+export default function LandingPage(props) {
     const yourPlaceRef = useRef(null);
     const partnersRef = useRef(null);
     const connectUsRef = useRef(null);
@@ -18,7 +18,7 @@ export default function LandingPage() {
                 <PartnersComponent />
             </section>
             <section ref={connectUsRef}>
-                <ConnectUsComponent />
+                <ConnectUsComponent loggedInProp={props.loggedInProp} />
             </section>
         </>
     )
