@@ -1,6 +1,5 @@
 import './App.css';
-import { useEffect, useState } from "react";
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import LandingPage from './pages/LandingPage';
 import ParticipantHomePage from './pages/ParticipantHomePage';
 import OrganizerHomePage from './pages/OrganizerHomePage';
