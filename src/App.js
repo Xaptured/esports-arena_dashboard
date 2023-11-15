@@ -1,28 +1,23 @@
 import './App.css';
-import ConnectUsPage from './components/ConnectUsPage/ConnectUsPage';
-import LandingPage from './components/LandingPage/LandingPage';
-import PartnersPage from './components/PartnersPage/PartnersPage';
-import YourPlacePage from './components/YourPlacePage/YourPlacePage';
-import { useRef } from 'react';
+import { useEffect, useState } from "react";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import LandingPage from './pages/LandingPage';
+import ParticipantHomePage from './pages/ParticipantHomePage';
+import OrganizerHomePage from './pages/OrganizerHomePage';
+import AdminHomePage from './pages/AdminHomePage';
 
 function App() {
 
-  const yourPlaceRef = useRef(null);
-  const partnersRef = useRef(null);
-  const connectUsRef = useRef(null);
-
   return (
     <>
-      <LandingPage yourPlaceRefProp={yourPlaceRef} partnersRefProp={partnersRef} connectUsRefProp={connectUsRef} />
-      <section ref={yourPlaceRef}>
-        <YourPlacePage />
-      </section>
-      <section ref={partnersRef}>
-        <PartnersPage />
-      </section>
-      <section ref={connectUsRef}>
-        <ConnectUsPage />
-      </section>
+      <Routes>
+        <Route path='/' element={<LandingPage />} />
+        <Route path='/participant-home' element={<ParticipantHomePage />} />
+        <Route path='/organizer-home' element={<OrganizerHomePage />} />
+        <Route path='/admin-home' element={<AdminHomePage />} />
+        {/* may add custom error page for below route - page not found */}
+        <Route path='*' element={<Navigate to='/' />} />
+      </Routes>
     </>
   );
 }
