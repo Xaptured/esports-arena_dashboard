@@ -1,0 +1,31 @@
+.subcontent-container {
+  /* width: 500px; */
+  flex-basis: 40%;
+  height: auto;
+  min-height: 65vh;
+  padding-top: 3%;
+}
+
+.subcontent_heading {
+  font-family: "FontTwo", cursive;
+  font-size: 55px;
+  letter-spacing: 1px;
+}
+
+.subcontent_body {
+  font-family: "FontOne", sans-serif;
+  font-size: 30px;
+}
+
+.subcontent_button {
+  display: flex;
+  justify-content: center;
+  font-family: "FontOne", sans-serif;
+  width: 100%;
+  margin-top: 5%;
+  margin-bottom: 2%;
+  border-width: 5px;
+  border-radius: 0%;
+  align-items: center;
+  text-align: center;
+}

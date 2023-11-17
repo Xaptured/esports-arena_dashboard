@@ -12,7 +12,7 @@ export default function LandingPage(props) {
         <>
             <LandingComponent yourPlaceRefProp={yourPlaceRef} partnersRefProp={partnersRef} connectUsRefProp={connectUsRef} />
             <section ref={yourPlaceRef}>
-                <YourPlaceComponent />
+                <YourPlaceComponent connectUsRefProp={connectUsRef} />
             </section>
             <section ref={partnersRef}>
                 <PartnersComponent />

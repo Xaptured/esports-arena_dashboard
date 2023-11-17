@@ -1,4 +1,4 @@
-.yourplacepage-container {
+.yourplace-page {
   width: 100%;
   height: auto;
   min-height: 100vh;
@@ -6,4 +6,8 @@
   background-repeat: no-repeat;
   background-position: center 180%;
   background-size: cover;
+}
+
+.yourplace-container {
+  padding-top: 8%;
 }
