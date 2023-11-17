@@ -1,4 +1,4 @@
-.footer-container {
+.footerpage {
   height: 23vh;
   margin-top: 3%;
   background-image: url(/public/assets/bg-3.jpg);
@@ -6,4 +6,41 @@
   background-position: center 50%;
   background-size: cover;
   border-top: 3px solid grey;
+}
+
+.footer-overlay {
+  backdrop-filter: blur(5px);
+  height: 23vh;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 2%;
+}
+
+.icon {
+  width: 70px;
+  height: 70px;
+  transition: transform 0.2s ease;
+}
+
+.icon:hover {
+  transform: scale(1.2);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.copyright_container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2%;
+}
+
+.copyright_content {
+  font-family: "FontOne", sans-serif;
+  padding-left: 0.5%;
 }
