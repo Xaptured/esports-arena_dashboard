@@ -10,7 +10,7 @@ export default function LandingPage(props) {
     return (
         <div className='container landingpage-container'>
             <NavigationBar yourPlaceRefProp={yourPlaceRefProp} partnersRefProp={partnersRefProp} connectUsRefProp={connectUsRefProp} />
-            <AboutUs />
+            <AboutUs refProp={connectUsRefProp} />
         </div>
     )
 }
