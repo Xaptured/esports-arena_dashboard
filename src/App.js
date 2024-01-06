@@ -10,7 +10,7 @@ function App() {
 
   const navigate = useNavigate();
   const [isLoggedIn, setisLoggedIn] = useState({
-    isParticipantLogin: false,
+    isParticipantLogin: true,
     isAdminLogin: false,
     isOrganizerLogin: false,
   });

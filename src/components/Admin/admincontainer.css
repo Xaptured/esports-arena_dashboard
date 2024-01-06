@@ -1,0 +1,9 @@
+.admin-container {
+  width: 100%;
+  height: auto;
+  min-height: 100vh;
+  background-image: url(/public/assets/bg-8.jpg);
+  background-repeat: no-repeat;
+  background-position: center 180%;
+  background-size: cover;
+}

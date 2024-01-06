@@ -1,9 +1,10 @@
 import React from 'react'
+import AdminContainer from '../components/Admin/AdminContainer'
 
 export default function AdminHomePage() {
     return (
         <div>
-            <h1>Admin Home Page</h1>
+            <AdminContainer />
         </div>
     )
 }

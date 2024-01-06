@@ -1,9 +1,10 @@
 import React from 'react'
+import OrganizerContainer from '../components/Organizer/OrganizerContainer'
 
 export default function OrganizerHomePage() {
     return (
         <div>
-            <h1>Organizer Home Page</h1>
+            <OrganizerContainer />
         </div>
     )
 }
