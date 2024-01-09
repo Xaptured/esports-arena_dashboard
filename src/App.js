@@ -1,11 +1,11 @@
 import './App.css';
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import LandingPage from './pages/LandingPage';
 import ParticipantHomePage from './pages/ParticipantHomePage';
 import OrganizerHomePage from './pages/OrganizerHomePage';
 import AdminHomePage from './pages/AdminHomePage';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtomValue } from 'jotai';
 import { USERS, loggedInUserAtom } from './atoms/loginDataAtom';
 
 function App() {
