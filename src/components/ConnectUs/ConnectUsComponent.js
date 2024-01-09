@@ -7,7 +7,7 @@ export default function ConnectUsPage(props) {
     return (
         <>
             <div className='connectuspage-container'>
-                <ConnectUs loggedInProp={props.loggedInProp} />
+                <ConnectUs />
             </div>
             <Footer />
         </>

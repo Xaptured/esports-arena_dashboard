@@ -1,36 +1,35 @@
 import './App.css';
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import LandingPage from './pages/LandingPage';
 import ParticipantHomePage from './pages/ParticipantHomePage';
 import OrganizerHomePage from './pages/OrganizerHomePage';
 import AdminHomePage from './pages/AdminHomePage';
+import { useAtomValue } from 'jotai';
+import { USERS, loggedInUserAtom } from './atoms/loginDataAtom';
 
 function App() {
 
   const navigate = useNavigate();
-  const [isLoggedIn, setisLoggedIn] = useState({
-    isParticipantLogin: true,
-    isAdminLogin: false,
-    isOrganizerLogin: false,
-  });
+
+  const loginData = useAtomValue(loggedInUserAtom);
 
   useEffect(() => {
-    if (isLoggedIn.isParticipantLogin) {
+    if (loginData.userType === USERS.PARTICIPANT) {
       navigate("/participant-home");
-    } else if (isLoggedIn.isOrganizerLogin) {
+    } else if (loginData.userType === USERS.ORGANIZER) {
       navigate("/organizer-home");
-    } else if (isLoggedIn.isAdminLogin) {
+    } else if (loginData.userType === USERS.ADMIN) {
       navigate("/admin-home");
     } else {
       navigate("/");
     }
-  }, [navigate, isLoggedIn.isAdminLogin, isLoggedIn.isOrganizerLogin, isLoggedIn.isParticipantLogin]);
+  }, [navigate, loginData.userType]);
 
   return (
     <>
       <Routes>
-        <Route path='/' element={<LandingPage loggedInProp={setisLoggedIn} />} />
+        <Route path='/' element={<LandingPage />} />
         <Route path='/participant-home' element={<ParticipantHomePage />} />
         <Route path='/organizer-home' element={<OrganizerHomePage />} />
         <Route path='/admin-home' element={<AdminHomePage />} />
