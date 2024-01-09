@@ -1,10 +1,12 @@
+import { useSetAtom } from 'jotai';
 import backendService from '../../services/backendService';
 import './connectus.css'
 import React, { useState } from 'react'
+import { USERS, loggedInUserAtom } from '../../atoms/loginDataAtom';
 
-export default function ConnectUs(props) {
+export default function ConnectUs() {
 
-    const { loggedInProp } = props;
+    const setLoginData = useSetAtom(loggedInUserAtom);
 
     const initialCredentials = {
         email: '',
@@ -127,30 +129,27 @@ export default function ConnectUs(props) {
         } else {
             if (result.role === 'PARTICIPANT') {
                 setLoginMessage('Logged in as PARTICIPANT');
-                const participant = {
-                    isParticipantLogin: true,
-                    isAdminLogin: false,
-                    isOrganizerLogin: false,
+                const loginData = {
+                    userType: USERS.PARTICIPANT,
+                    email: credentials.email
                 }
-                loggedInProp(participant);
+                setLoginData(loginData);
             }
             else if (result.role === 'ORGANIZER') {
                 setLoginMessage('Logged in as ORGANIZER');
-                const organizer = {
-                    isParticipantLogin: false,
-                    isAdminLogin: false,
-                    isOrganizerLogin: true,
+                const loginData = {
+                    userType: USERS.ORGANIZER,
+                    email: credentials.email
                 }
-                loggedInProp(organizer);
+                setLoginData(loginData);
             }
             else {
                 setLoginMessage('Logged in as ADMIN');
-                const admin = {
-                    isParticipantLogin: false,
-                    isAdminLogin: true,
-                    isOrganizerLogin: false,
+                const loginData = {
+                    userType: USERS.ADMIN,
+                    email: credentials.email
                 }
-                loggedInProp(admin);
+                setLoginData(loginData);
             }
         }
     }

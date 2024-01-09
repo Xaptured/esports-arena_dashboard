@@ -18,7 +18,7 @@ export default function LandingPage(props) {
                 <PartnersComponent />
             </section>
             <section ref={connectUsRef}>
-                <ConnectUsComponent loggedInProp={props.loggedInProp} />
+                <ConnectUsComponent />
             </section>
         </>
     )
