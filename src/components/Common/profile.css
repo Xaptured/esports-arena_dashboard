@@ -1,0 +1,151 @@
+.profile-container {
+  width: 90%;
+  min-height: 80vh;
+  height: auto;
+}
+
+.profile-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.profile-desciption {
+  width: 440px;
+  min-height: 60vh;
+  font-family: "FontOne", sans-serif;
+  font-size: 40px;
+  text-align: right;
+  padding-top: 7%;
+}
+
+.profile-form {
+  width: 500px;
+  min-height: 60vh;
+  padding-top: 2%;
+}
+
+.form-box-profile {
+  background: transparent;
+  border: 3px solid white;
+  backdrop-filter: blur(4px);
+  color: #fff;
+  border-radius: 12px;
+  padding: 8% 7%;
+  transition: all 0.3s ease-in-out;
+}
+
+.form-box-profile:hover {
+  box-shadow: 17px 17px 17px #ede6e6;
+}
+
+.form-box-profile h1 {
+  font-family: "FontTwo", cursive;
+  font-size: 40px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.form-box-profile .input-box {
+  width: 100%;
+  height: 50px;
+  margin: 8% 0;
+}
+
+.input-box input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  outline: none;
+  border: 2px solid white;
+  border-radius: 40px;
+  font-size: 16px;
+  color: #fff;
+  padding: 20px 45px 20px 20px;
+}
+
+.input-box input::placeholder {
+  color: rgb(111, 110, 110);
+  text-align: left;
+}
+
+.input-box i {
+  position: absolute;
+  right: 20px;
+  top: 30%;
+  transform: translate(-50%);
+  font-size: 20px;
+}
+
+.button_submit_profile {
+  width: 100%;
+  font-family: "FontOne", sans-serif;
+  border-width: 5px;
+  border-radius: 0%;
+}
+
+.message {
+  display: flex;
+  justify-content: center;
+  color: gray;
+  font-size: 14px;
+}
+
+.clear {
+  clear: both;
+}
+
+.checkbox-content {
+  display: flex;
+  justify-content: space-evenly;
+  width: 95%;
+  padding: 3%;
+}
+
+.checkbox-container {
+  display: flex;
+  /* justify-content: center; */
+}
+
+.game-name {
+  font-family: "FontOne", sans-serif;
+  font-size: 18px;
+  margin-left: 50%;
+}
+.checkBox {
+  display: block;
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+  border: 3px solid rgba(255, 255, 255, 0);
+  border-radius: 5px;
+  position: absolute;
+  overflow: hidden;
+  box-shadow: 0px 0px 0px 2px #fff;
+}
+
+.checkBox div {
+  width: 60px;
+  height: 60px;
+  background-color: #fff;
+  top: -52px;
+  left: -52px;
+  position: absolute;
+  transform: rotateZ(45deg);
+  z-index: 100;
+}
+
+.checkBox input[type="checkbox"]:checked + div {
+  left: -10px;
+  top: -10px;
+}
+
+.checkBox input[type="checkbox"] {
+  position: absolute;
+  left: 50px;
+  visibility: hidden;
+}
+
+.transition {
+  transition: 300ms ease;
+}

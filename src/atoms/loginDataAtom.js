@@ -8,7 +8,10 @@ export const USERS = {
 
 const user = {
     userType: '',
-    email: ''
+    email: '',
 }
 
+const profileStatus = false;
+
 export const loggedInUserAtom = atom(user);
+export const profileStatusAtom = atom(profileStatus);

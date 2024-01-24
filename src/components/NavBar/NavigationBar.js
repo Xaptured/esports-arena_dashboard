@@ -3,19 +3,37 @@ import './navigationbar.css';
 import {
     participantNavElements, organizerNavElements, adminNavElements
 } from '../../constants/NavBarConstants';
+import { useAtomValue, useAtom } from 'jotai';
+import { activeAdminTabsAtom, activeOrganizerTabsAtom, activeParticipantTabsAtom } from '../../atoms/activeTabsAtom';
+import { USERS, loggedInUserAtom } from '../../atoms/loginDataAtom';
 
-export default function NavigationBar(props) {
+export default function NavigationBar() {
 
-    const { userType, currentComponent, components } = props;
+    const [participantTabs, setParticipantTabs] = useAtom(activeParticipantTabsAtom);
+    const [organizerTabs, setOrganizerTabs] = useAtom(activeOrganizerTabsAtom);
+    const [adminTabs, setAdminTabs] = useAtom(activeAdminTabsAtom);
+    const loginData = useAtomValue(loggedInUserAtom);
 
-    const setCurrentComponent = (index) => {
-        console.log(index)
-        const arr = new Array(currentComponent.length);
-        for (let i = 0; i < currentComponent.length; i++) {
+    const createComponentsArray = (tabs, index) => {
+        const arr = new Array(tabs.length);
+        for (let i = 0; i < tabs.length; i++) {
             if (i === index) arr[i] = true;
             else arr[i] = false;
         }
-        components(arr);
+        return arr;
+    }
+
+    const setCurrentComponent = (index) => {
+        if (loginData.userType === USERS.PARTICIPANT) {
+            const activeTabsArray = createComponentsArray(participantTabs, index);
+            setParticipantTabs(activeTabsArray);
+        } else if (loginData.userType === USERS.ORGANIZER) {
+            const activeTabsArray = createComponentsArray(organizerTabs, index);
+            setOrganizerTabs(activeTabsArray);
+        } else {
+            const activeTabsArray = createComponentsArray(adminTabs, index);
+            setAdminTabs(activeTabsArray);
+        }
     }
     return (
         <div>
@@ -38,14 +56,14 @@ export default function NavigationBar(props) {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0 fs-5 nav_elements">
                             {
-                                userType === 'participant' ?
+                                loginData.userType === USERS.PARTICIPANT ?
                                     (participantNavElements.map((element, index) =>
                                         <li key={index} className="nav-item ms-5 px-3" onClick={() => setCurrentComponent(index)}>
                                             {element}
                                         </li>)
                                     )
                                     :
-                                    userType === 'organizer' ? (organizerNavElements.map((element, index) =>
+                                    loginData.userType === USERS.ORGANIZER ? (organizerNavElements.map((element, index) =>
                                         <li key={index} className="nav-item ms-5 px-3" onClick={() => setCurrentComponent(index)}>
                                             {element}
                                         </li>))
