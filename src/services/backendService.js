@@ -70,6 +70,49 @@ const backendService = {
             console.log("Error while posting Comments data", error);
         }
     },
+
+    async saveProfile(profile) {
+        try {
+            const result = await fetch('http://localhost:8086/profile/save-profile', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(profile)
+            });
+
+            const jsonResult = await result.json();
+
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while saving profile data", error);
+        }
+    },
+
+    async getActiveGamesData() {
+        try {
+            const result = await fetch('http://localhost:8086/games/get-active-games');
+
+            const jsonResult = await result.json();
+
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while getting active games", error);
+        }
+    },
+
+    async isProfileComplete(email) {
+        try {
+            const url = 'http://localhost:8086/profile/is-profile-complete/' + email;
+            const result = await fetch(url);
+
+            const jsonResult = await result.json();
+
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while checking profile completion", error);
+        }
+    },
 }
 
 export default backendService;
