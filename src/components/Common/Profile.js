@@ -6,7 +6,7 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { loggedInUserAtom } from '../../atoms/loginDataAtom';
 import backendService from '../../services/backendService';
 import { profileStatusAtom } from '../../atoms/loginDataAtom'
-import { Oval } from 'react-loader-spinner'
+// import { Oval } from 'react-loader-spinner'
 
 export default function Profile() {
 

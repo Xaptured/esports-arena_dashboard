@@ -3,7 +3,7 @@ import './navigationbar.css';
 import {
     participantNavElements, organizerNavElements, adminNavElements
 } from '../../constants/NavBarConstants';
-import { useSetAtom, useAtomValue, useAtom } from 'jotai';
+import { useAtomValue, useAtom } from 'jotai';
 import { activeAdminTabsAtom, activeOrganizerTabsAtom, activeParticipantTabsAtom } from '../../atoms/activeTabsAtom';
 import { USERS, loggedInUserAtom } from '../../atoms/loginDataAtom';
 
