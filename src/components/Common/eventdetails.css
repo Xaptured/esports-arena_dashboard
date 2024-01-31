@@ -1,0 +1,10 @@
+.event-name {
+  padding-top: 9%;
+}
+
+h1.event-name-content {
+  font-family: "FontOne", sans-serif;
+  font-size: 35px;
+  text-align: center;
+  letter-spacing: 2px;
+}

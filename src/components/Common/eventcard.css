@@ -1,0 +1,18 @@
+.event-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 3px solid white;
+  border-radius: 8px;
+  padding: 3%;
+  margin-bottom: 3%;
+  background: transparent;
+  backdrop-filter: blur(3px);
+}
+
+.button_event {
+  width: 40%;
+  font-family: "FontOne", sans-serif;
+  border-width: 3px;
+  border-radius: 0%;
+}

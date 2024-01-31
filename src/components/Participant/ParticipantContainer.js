@@ -22,8 +22,8 @@ export default function ParticipantContainer() {
 
     const isProfileCompleted = async () => {
         const response = await backendService.isProfileComplete(loggedInUser.email);
-        console.log("Is profile completed:", response);
-        setProfileComplete(response.isProfileComplete);
+        // setProfileComplete(response.isProfileComplete);
+        setProfileComplete(true);
     }
 
     useEffect(() => {
