@@ -113,6 +113,32 @@ const backendService = {
             console.log("Error while checking profile completion", error);
         }
     },
+
+    async getActiveEventsWrtInterestedGamesData(email) {
+        try {
+            const url = 'http://localhost:8086/events/get-upcoming-events-interested-games/' + email;
+            const result = await fetch(url);
+
+            const jsonResult = await result.json();
+
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while getting active events with respect to interested games", error);
+        }
+    },
+
+    async getEventDetails(eventName) {
+        try {
+            const url = 'http://localhost:8086/events/get-event/' + eventName;
+            const result = await fetch(url);
+
+            const jsonResult = await result.json();
+
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while getting event details with name", error);
+        }
+    }
 }
 
 export default backendService;
