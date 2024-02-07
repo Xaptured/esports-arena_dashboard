@@ -35,6 +35,8 @@ h1.event-name-content {
   border: 1px solid rgb(130, 126, 126);
   border-radius: 5px;
   padding: 5%;
+  background: transparent;
+  backdrop-filter: blur(3px);
 }
 
 .event-description-content {
@@ -53,4 +55,11 @@ h1.event-name-content {
 .rule-list:hover {
   text-decoration: none;
   color: white;
+}
+
+.button_team {
+  width: 100%;
+  font-family: "FontOne", sans-serif;
+  border-width: 3px;
+  border-radius: 30px;
 }

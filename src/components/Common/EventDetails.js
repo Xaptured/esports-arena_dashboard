@@ -1,11 +1,21 @@
 import React from 'react'
 import './eventdetails.css'
 import { useAtomValue } from 'jotai';
-import { eventDetailsAtom } from '../../atoms/eventAtom';
+import { eventDetailsAtom, eventDetailsAtomCopy } from '../../atoms/eventAtom';
+import { useCopyValueAtom } from '../../atoms/loginDataAtom';
 
 export default function EventDetails() {
 
-    const eventDetails = useAtomValue(eventDetailsAtom);
+    // ESA-058-START
+    const useCopyAtom = useAtomValue(useCopyValueAtom);
+    let eventDetailsAtomResult;
+    if (useCopyAtom) {
+        eventDetailsAtomResult = eventDetailsAtomCopy;
+    } else {
+        eventDetailsAtomResult = eventDetailsAtom;
+    }
+    // ESA-058-END
+    const eventDetails = useAtomValue(eventDetailsAtomResult);
     return (
         <>
             {
@@ -55,7 +65,14 @@ export default function EventDetails() {
                             }
                         </ul>
                     </div>
-                    <div className="event-forms"></div>
+                    <div className="event-forms">
+                        <button type="button" className='btn btn-outline-light button_team'>
+                            JOIN A TEAM
+                        </button>
+                        <button type="button" className='btn btn-outline-light button_team'>
+                            CREATE A TEAM
+                        </button>
+                    </div>
                 </div>
             }
         </>

@@ -11,17 +11,26 @@ import { activeParticipantTabsAtom } from '../../atoms/activeTabsAtom'
 import { profileStatusAtom } from '../../atoms/loginDataAtom'
 import Profile from '../Common/Profile'
 import backendService from '../../services/backendService'
-import { loggedInUserAtom } from '../../atoms/loginDataAtom'
+import { loggedInUserAtom, loggedInUserAtomCopy } from '../../atoms/loginDataAtom'
+import { useCopyValueAtom } from '../../atoms/loginDataAtom';
 
 export default function ParticipantContainer() {
     const participantTabs = useAtomValue(activeParticipantTabsAtom);
-
-    // need to add an API call to check the profile is completed or not inside useeffect.
+    // ESA-058-START
+    const useCopyAtom = useAtomValue(useCopyValueAtom);
+    let loggedInUserAtomResult;
+    if (useCopyAtom) {
+        loggedInUserAtomResult = loggedInUserAtomCopy;
+    } else {
+        loggedInUserAtomResult = loggedInUserAtom;
+    }
+    // ESA-058-END
     const [isProfileComplete, setProfileComplete] = useAtom(profileStatusAtom);
-    const loggedInUser = useAtomValue(loggedInUserAtom);
+    const loggedInUser = useAtomValue(loggedInUserAtomResult);
 
     const isProfileCompleted = async () => {
         const response = await backendService.isProfileComplete(loggedInUser.email);
+        // ESA-058: Uncomment below code
         // setProfileComplete(response.isProfileComplete);
         setProfileComplete(true);
     }

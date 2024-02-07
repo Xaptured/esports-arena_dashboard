@@ -1,17 +1,27 @@
 import React from 'react'
 import './eventcard.css'
-import { useSetAtom } from 'jotai'
-import { eventDetailsAtom } from '../../atoms/eventAtom'
+import { useSetAtom, useAtomValue } from 'jotai'
+import { eventDetailsAtom, eventDetailsAtomCopy } from '../../atoms/eventAtom'
 import backendService from '../../services/backendService'
+import { useCopyValueAtom } from '../../atoms/loginDataAtom';
 
 export default function EventCard(props) {
 
+    // ESA-058-START
+    const useCopyAtom = useAtomValue(useCopyValueAtom);
+    let eventDetailsAtomResult;
+    if (useCopyAtom) {
+        eventDetailsAtomResult = eventDetailsAtomCopy;
+    } else {
+        eventDetailsAtomResult = eventDetailsAtom;
+    }
+    // ESA-058-END
     const setEventDetails = useSetAtom(eventDetailsAtom);
     const handleParticipate = async (eventName) => {
-        // make API call to get event details according to the event name
         const response = await backendService.getEventDetails(eventName);
-        console.log("Event details: ", response);
-        setEventDetails(response);
+        // ESA-058: Uncomment below code
+        // setEventDetails(response);
+        setEventDetails(eventDetailsAtomResult);
     }
     return (
         <div className='event-card'>
