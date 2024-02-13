@@ -138,7 +138,51 @@ const backendService = {
         } catch (error) {
             console.log("Error while getting event details with name", error);
         }
-    }
+    },
+
+    async getEventId(eventName) {
+        try {
+            const url = 'http://localhost:8086/events/get-event-id/' + eventName;
+            const result = await fetch(url);
+
+            const jsonResult = await result.json();
+
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while getting event id with name", error);
+        }
+    },
+
+    async saveTeam(team) {
+        try {
+            const result = await fetch('http://localhost:8086/events/save-team?isCreate=true&isUpdate=false', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(team)
+            });
+
+            const jsonResult = await result.json();
+
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while saving credential data", error);
+        }
+    },
+
+    async isRegistered(eventId, eventName, email) {
+        try {
+            const url = 'http://localhost:8086/events/is-registered?eventId=' + eventId + '&eventName=' + eventName + '&email=' + email;
+            const result = await fetch(url);
+
+            const jsonResult = await result.json();
+
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while getting isRegistered", error);
+        }
+    },
 }
 
 export default backendService;
