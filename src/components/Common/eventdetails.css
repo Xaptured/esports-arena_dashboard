@@ -143,7 +143,7 @@ h1.event-name-content {
   margin-top: 5%;
 }
 
-.message-space {
+.error-message-space {
   font-size: 16px;
   color: gray;
   display: flex;
@@ -158,4 +158,64 @@ h1.event-name-content {
 
 .close-icon-container :hover {
   color: white;
+}
+
+.message-space {
+  font-size: 30px;
+  color: rgb(174, 173, 173);
+  display: flex;
+  justify-content: center;
+  margin-top: 6%;
+  margin-bottom: 3%;
+}
+
+.button_show_participant {
+  width: 100%;
+  font-family: "FontOne", sans-serif;
+  border-width: 5px;
+  border-radius: 30px;
+}
+
+.show-participant-container {
+  width: 100%;
+  min-height: 20vh;
+  padding: 4%;
+}
+
+.show-participant-box {
+  background: transparent;
+  border: 3px solid white;
+  backdrop-filter: blur(2px);
+  color: #fff;
+  border-radius: 12px;
+  padding: 3% 2%;
+  transition: all 0.3s ease-in-out;
+}
+
+.show-participant-box h1 {
+  font-family: "FontTwo", cursive;
+  font-size: 40px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.participant-content-container {
+  padding-left: 4%;
+  padding-right: 4%;
+  margin-top: 8%;
+}
+
+.participant-content {
+  margin-top: 4%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.participant-content-username {
+  font-size: 25px;
+}
+
+.participant-content-email {
+  font-size: 15px;
 }

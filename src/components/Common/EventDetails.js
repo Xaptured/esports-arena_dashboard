@@ -33,6 +33,9 @@ export default function EventDetails() {
     const [isRegistered, setRegistered] = useState(false);
     const [message, setMessage] = useState(null);
     const loggedInUser = useAtomValue(loggedInUserAtomResult);
+    const [showParticipants, setShowParticipants] = useState(false);
+    const [teamDetails, setTeamDetails] = useState(null);
+    const [countLeft, setCountLeft] = useState(null);
 
     const isFieldUnique = (value) => {
         const subarray = inputFields.slice(0, inputFields.length - 1);
@@ -124,18 +127,33 @@ export default function EventDetails() {
     }
 
     const isRegisteredInEvent = async () => {
-        const response = await backendService.isRegistered(eventId, eventDetails.name, loggedInUser.email);
-        if (response) {
-            const message = eventDetails.type === 'FREE' ? 'Team successfully registered' : 'Team successfully registered and it is in pending state. Once organizer approves it, you will receive an email of confirmation.';
-            setMessage(message);
+        await getEventId();
+        if (eventId) {
+            const response = await backendService.isRegistered(eventId, eventDetails.name, loggedInUser.email);
+            if (response) {
+                const message = eventDetails.type === 'FREE' ? 'Team successfully registered' : 'Team successfully registered and it is in pending state. Once organizer approves it, you will receive an email of confirmation.';
+                setMessage(message);
+            }
+            // setRegistered(response);
+            // ESA-058: make it set to the response
+            // const message = eventDetails.type === 'FREE' ? 'Team successfully registered' : 'Team successfully registered and it is in pending state. Once organizer approves it, you will receive an email of confirmation.';
+            // setMessage(message);
+            setRegistered(false);
         }
-        setRegistered(response);
+    }
+
+    const handleShowParticipant = async () => {
+        const responseForTeamDetails = await backendService.getTeamDetailsForEvent(eventId, eventDetails.name, loggedInUser.email);
+        setTeamDetails(responseForTeamDetails);
+        const responseCount = await backendService.remainingPlayersPerSlotCount(eventId, eventDetails.name, loggedInUser.email);
+        setCountLeft(responseCount);
+        setShowParticipants(!showParticipants);
+
     }
 
     useEffect(() => {
-        getEventId();
         isRegisteredInEvent();
-    }, [])
+    }, []);
     return (
         <>
             {
@@ -254,7 +272,7 @@ export default function EventDetails() {
                                                         </button>
                                                     </div>
                                                     {/* Use this space to show error messages */}
-                                                    <div className="message-space">{errorMsg}</div>
+                                                    <div className="error-message-space">{errorMsg}</div>
                                                 </form>
                                             </div>
                                         </div>
@@ -262,7 +280,43 @@ export default function EventDetails() {
 
                             </div>
                             :
-                            <div>{message}</div>
+                            <div>
+                                <div className='message-space'>{message}</div>
+                                {
+                                    showParticipants ?
+                                        <div className='show-participant-container'>
+                                            <div className="show-participant-box">
+                                                <div className="close-icon-container">
+                                                    <RxCross2 size={30} color="grey" onClick={handleShowParticipant} />
+                                                </div>
+                                                <h1>Participants</h1>
+                                                <div className="participant-content-container">
+                                                    {
+                                                        teamDetails && teamDetails.map((details) => (
+                                                            <div className='participant-content'>
+                                                                <div className='participant-content-username'>{details.name}</div>
+                                                                <div className='participant-content-email'>{details.email}</div>
+                                                            </div>
+                                                        ))
+                                                    }
+                                                </div>
+                                                {
+                                                    countLeft && countLeft > 1 && <div className='error-message-space'>{countLeft} slots left</div>
+                                                }
+                                                {
+                                                    countLeft && countLeft === 1 && <div className='error-message-space'>{countLeft} slot left</div>
+                                                }
+                                                {
+                                                    countLeft && countLeft < 1 && <div className='error-message-space'>No slots left</div>
+                                                }
+                                            </div>
+                                        </div>
+                                        :
+                                        <button type="button" className='btn btn-outline-light button_show_participant' onClick={handleShowParticipant}>
+                                            Show Participants
+                                        </button>
+                                }
+                            </div>
                     }
                 </div>
             }

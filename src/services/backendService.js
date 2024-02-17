@@ -183,6 +183,32 @@ const backendService = {
             console.log("Error while getting isRegistered", error);
         }
     },
+
+    async getTeamDetailsForEvent(eventId, eventName, email) {
+        try {
+            const url = 'http://localhost:8086/events/get-team-details-for-event?eventId=' + eventId + '&eventName=' + eventName + '&email=' + email;
+            const result = await fetch(url);
+
+            const jsonResult = await result.json();
+
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while getting getTeamDetailsForEvent", error);
+        }
+    },
+
+    async remainingPlayersPerSlotCount(eventId, eventName, email) {
+        try {
+            const url = 'http://localhost:8086/events/get-remaining-players-per-slot?eventId=' + eventId + '&eventName=' + eventName + '&email=' + email;
+            const result = await fetch(url);
+
+            const jsonResult = await result.json();
+
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while getting remainingPlayersPerSlotCount", error);
+        }
+    },
 }
 
 export default backendService;
