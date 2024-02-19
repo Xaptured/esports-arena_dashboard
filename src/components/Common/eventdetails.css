@@ -219,3 +219,70 @@ h1.event-name-content {
 .participant-content-email {
   font-size: 15px;
 }
+
+.join-team-container {
+  margin-top: 5%;
+}
+
+.join-team-container h1 {
+  font-family: "FontTwo", cursive;
+  font-size: 40px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.join-team-card-container {
+  background: transparent;
+  border: 3px solid white;
+  backdrop-filter: blur(2px);
+  color: #fff;
+  border-radius: 12px;
+  padding: 4% 4%;
+  transition: all 0.3s ease-in-out;
+  margin-top: 5%;
+}
+
+.join-team-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3%;
+}
+
+.team-name {
+  font-size: 25px;
+}
+
+.team-name p {
+  margin-bottom: 0%;
+}
+
+.join-team-slots-left {
+  font-size: 17px;
+  color: #7f7878;
+}
+
+.join-team-slots-left p {
+  margin-bottom: 0px;
+}
+
+.join-button {
+  display: flex;
+  justify-content: center;
+}
+
+.join-form-container {
+  width: 100%;
+  padding-top: 2%;
+}
+
+.join-team-card-action-bar {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 5%;
+}
+
+.join-team-card-button {
+  width: 40%;
+}

@@ -6,6 +6,7 @@ import { useCopyValueAtom } from '../../atoms/loginDataAtom';
 import { RxCross2 } from "react-icons/rx";
 import backendService from '../../services/backendService';
 import { loggedInUserAtom, loggedInUserAtomCopy } from '../../atoms/loginDataAtom';
+import JoinTeamCard from './JoinTeamCard';
 
 export default function EventDetails() {
 
@@ -36,6 +37,7 @@ export default function EventDetails() {
     const [showParticipants, setShowParticipants] = useState(false);
     const [teamDetails, setTeamDetails] = useState(null);
     const [countLeft, setCountLeft] = useState(null);
+    const [teamDetailsList, setTeamDetailsList] = useState(null);
 
     const isFieldUnique = (value) => {
         const subarray = inputFields.slice(0, inputFields.length - 1);
@@ -138,7 +140,12 @@ export default function EventDetails() {
             // ESA-058: make it set to the response
             // const message = eventDetails.type === 'FREE' ? 'Team successfully registered' : 'Team successfully registered and it is in pending state. Once organizer approves it, you will receive an email of confirmation.';
             // setMessage(message);
-            setRegistered(false);
+            else {
+                setRegistered(false);
+                const teamDetailsResponse = await backendService.getTeamsWithCount(eventId, eventDetails.name);
+                setTeamDetailsList(teamDetailsResponse);
+            }
+
         }
     }
 
@@ -151,9 +158,13 @@ export default function EventDetails() {
 
     }
 
+    const handleCloseParticipant = () => {
+        setShowParticipants(!showParticipants);
+    }
+
     useEffect(() => {
         isRegisteredInEvent();
-    }, []);
+    }, [eventId]);
     return (
         <>
             {
@@ -206,16 +217,6 @@ export default function EventDetails() {
                     {
                         !isRegistered ?
                             <div className="event-forms">
-                                {
-                                    !showJoinForm ?
-                                        <button type="button" className='btn btn-outline-light button_team' onClick={handleJoinTeamClick}>
-                                            JOIN A TEAM
-                                        </button>
-                                        :
-                                        <div>
-                                            Join Form
-                                        </div>
-                                }
                                 {
                                     !showCreateForm ?
                                         <button type="button" className='btn btn-outline-light button_team' onClick={handleCreateTeamClick}>
@@ -277,7 +278,24 @@ export default function EventDetails() {
                                             </div>
                                         </div>
                                 }
-
+                                {
+                                    !showJoinForm ?
+                                        <button type="button" className='btn btn-outline-light button_team' onClick={handleJoinTeamClick}>
+                                            JOIN A TEAM
+                                        </button>
+                                        :
+                                        <div className='join-team-container'>
+                                            <div className="close-icon-container">
+                                                <RxCross2 size={30} color="grey" onClick={handleJoinTeamClick} />
+                                            </div>
+                                            <h1>Join a team</h1>
+                                            {
+                                                teamDetailsList && teamDetailsList.map((teamDetails) => (
+                                                    teamDetails.remainingPlayers >= 1 && <JoinTeamCard teamName={teamDetails.teamName} count={teamDetails.remainingPlayers} registered={setRegistered} />
+                                                ))
+                                            }
+                                        </div>
+                                }
                             </div>
                             :
                             <div>
@@ -287,7 +305,7 @@ export default function EventDetails() {
                                         <div className='show-participant-container'>
                                             <div className="show-participant-box">
                                                 <div className="close-icon-container">
-                                                    <RxCross2 size={30} color="grey" onClick={handleShowParticipant} />
+                                                    <RxCross2 size={30} color="grey" onClick={handleCloseParticipant} />
                                                 </div>
                                                 <h1>Participants</h1>
                                                 <div className="participant-content-container">
