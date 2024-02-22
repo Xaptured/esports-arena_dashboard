@@ -44,16 +44,22 @@ export default function EventDetails() {
         return subarray.includes(value);
     };
 
-    const handleAddField = () => {
+    const handleAddField = async () => {
         const val = inputFields[inputFields.length - 1];
         if (val === '') {
             setErrorMsg("Please fill the email.");
         } else {
             if (!isFieldUnique(val)) {
-                setErrorMsg('');
-                let counter = countPlayers;
-                setCountPlayers(++counter);
-                setInputFields([...inputFields, '']);
+                const response = await backendService.isProfilePresent(val);
+                if (response) {
+                    setErrorMsg('');
+                    let counter = countPlayers;
+                    setCountPlayers(++counter);
+                    setInputFields([...inputFields, '']);
+                } else {
+                    setErrorMsg('Please register the last entered email to participate in the event');
+                }
+
             } else {
                 setErrorMsg('Please enter a new email address.');
             }
@@ -218,7 +224,8 @@ export default function EventDetails() {
                         !isRegistered ?
                             <div className="event-forms">
                                 {
-                                    !showCreateForm ?
+                                    eventDetails.remainingSlots > 0 &&
+                                        !showCreateForm ?
                                         <button type="button" className='btn btn-outline-light button_team' onClick={handleCreateTeamClick}>
                                             CREATE A TEAM
                                         </button>
@@ -291,7 +298,7 @@ export default function EventDetails() {
                                             <h1>Join a team</h1>
                                             {
                                                 teamDetailsList && teamDetailsList.map((teamDetails) => (
-                                                    teamDetails.remainingPlayers >= 1 && <JoinTeamCard teamName={teamDetails.teamName} count={teamDetails.remainingPlayers} registered={setRegistered} />
+                                                    teamDetails.remainingPlayers > 0 && <JoinTeamCard teamName={teamDetails.teamName} count={teamDetails.remainingPlayers} registered={setRegistered} />
                                                 ))
                                             }
                                         </div>

@@ -148,6 +148,7 @@ h1.event-name-content {
   color: gray;
   display: flex;
   justify-content: center;
+  text-align: center;
   margin-top: 6%;
 }
 

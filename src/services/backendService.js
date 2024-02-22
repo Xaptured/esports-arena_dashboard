@@ -240,6 +240,19 @@ const backendService = {
             console.log("Error while updating team data", error);
         }
     },
+
+    async isProfilePresent(email) {
+        try {
+            const url = 'http://localhost:8086/profile/is-profile-present/' + email;
+            const result = await fetch(url);
+
+            const jsonResult = await result.json();
+
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while fetching is profile present", error);
+        }
+    },
 }
 
 export default backendService;
