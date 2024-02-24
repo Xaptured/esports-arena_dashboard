@@ -1,12 +1,21 @@
-import { useSetAtom } from 'jotai';
+import { useSetAtom, useAtomValue } from 'jotai';
 import backendService from '../../services/backendService';
 import './connectus.css'
 import React, { useState } from 'react'
-import { USERS, loggedInUserAtom } from '../../atoms/loginDataAtom';
+import { USERS, loggedInUserAtom, loggedInUserAtomCopy } from '../../atoms/loginDataAtom';
+import { useCopyValueAtom } from '../../atoms/loginDataAtom';
 
 export default function ConnectUs() {
-
-    const setLoginData = useSetAtom(loggedInUserAtom);
+    // ESA-058-START
+    const useCopyAtom = useAtomValue(useCopyValueAtom);
+    let loggedInUserAtomResult;
+    if (useCopyAtom) {
+        loggedInUserAtomResult = loggedInUserAtomCopy;
+    } else {
+        loggedInUserAtomResult = loggedInUserAtom;
+    }
+    // ESA-058-END
+    const setLoginData = useSetAtom(loggedInUserAtomResult);
 
     const initialCredentials = {
         email: '',

@@ -3,14 +3,24 @@ import './profile.css'
 import { LiaLongArrowAltRightSolid } from "react-icons/lia";
 import { useState } from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
-import { loggedInUserAtom } from '../../atoms/loginDataAtom';
+import { loggedInUserAtom, loggedInUserAtomCopy } from '../../atoms/loginDataAtom';
 import backendService from '../../services/backendService';
 import { profileStatusAtom } from '../../atoms/loginDataAtom'
+import { useCopyValueAtom } from '../../atoms/loginDataAtom';
 // import { Oval } from 'react-loader-spinner'
 
 export default function Profile() {
 
-    const loggedInUser = useAtomValue(loggedInUserAtom);
+    // ESA-058-START
+    const useCopyAtom = useAtomValue(useCopyValueAtom);
+    let loggedInUserAtomResult;
+    if (useCopyAtom) {
+        loggedInUserAtomResult = loggedInUserAtomCopy;
+    } else {
+        loggedInUserAtomResult = loggedInUserAtom;
+    }
+    // ESA-058-END
+    const loggedInUser = useAtomValue(loggedInUserAtomResult);
 
     const setProfileStatusAtom = useSetAtom(profileStatusAtom);
 

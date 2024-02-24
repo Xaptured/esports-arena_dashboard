@@ -6,13 +6,22 @@ import ParticipantHomePage from './pages/ParticipantHomePage';
 import OrganizerHomePage from './pages/OrganizerHomePage';
 import AdminHomePage from './pages/AdminHomePage';
 import { useAtomValue } from 'jotai';
-import { USERS, loggedInUserAtom } from './atoms/loginDataAtom';
+import { USERS, loggedInUserAtom, loggedInUserAtomCopy } from './atoms/loginDataAtom';
+import { useCopyValueAtom } from './atoms/loginDataAtom';
 
 function App() {
 
   const navigate = useNavigate();
-
-  const loginData = useAtomValue(loggedInUserAtom);
+  // ESA-058-START
+  const useCopyAtom = useAtomValue(useCopyValueAtom);
+  let loggedInUserAtomResult;
+  if (useCopyAtom) {
+    loggedInUserAtomResult = loggedInUserAtomCopy;
+  } else {
+    loggedInUserAtomResult = loggedInUserAtom;
+  }
+  // ESA-058-END
+  const loginData = useAtomValue(loggedInUserAtomResult);
 
   useEffect(() => {
     if (loginData.userType === USERS.PARTICIPANT) {

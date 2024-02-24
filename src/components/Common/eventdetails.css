@@ -1,0 +1,289 @@
+.event-content-scrollable {
+  max-height: 75vh;
+  overflow-y: scroll;
+  padding-left: 5%;
+  padding-right: 5%;
+  scroll-behavior: smooth;
+  margin-top: 1%;
+}
+
+.event-content-scrollable::-webkit-scrollbar {
+  width: 8px;
+}
+
+.event-content-scrollable::-webkit-scrollbar-thumb {
+  background-color: #d9d2d2;
+  border-radius: 8px;
+}
+
+.event-content-scrollable::-webkit-scrollbar-track {
+  background-color: #7f7878;
+  border-radius: 8px;
+}
+
+h1.event-name-content {
+  font-family: "FontOne", sans-serif;
+  font-size: 40px;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.event-description {
+  /* font-family: "FontOne", sans-serif; */
+  font-size: 25px;
+  margin-top: 8%;
+  border: 1px solid rgb(130, 126, 126);
+  border-radius: 5px;
+  padding: 5%;
+  background: transparent;
+  backdrop-filter: blur(3px);
+}
+
+.event-description-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.event-rules {
+  margin-top: 8%;
+}
+
+.event-rules-content {
+  font-size: 22px;
+}
+
+.rule-list:hover {
+  text-decoration: none;
+  color: white;
+}
+
+.button_team {
+  width: 100%;
+  font-family: "FontOne", sans-serif;
+  border-width: 3px;
+  border-radius: 30px;
+}
+
+.create-team-form {
+  width: 100%;
+  min-height: 40vh;
+  padding-top: 2%;
+}
+
+.form-box-create-team {
+  background: transparent;
+  border: 3px solid white;
+  backdrop-filter: blur(2px);
+  color: #fff;
+  border-radius: 12px;
+  padding: 6% 4%;
+  transition: all 0.3s ease-in-out;
+}
+
+.form-box-create-team h1 {
+  font-family: "FontTwo", cursive;
+  font-size: 40px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.form-box-create-team .input-box {
+  width: 100%;
+  height: 50px;
+  margin: 8% 0;
+}
+
+.input-box input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  outline: none;
+  border: 2px solid white;
+  border-radius: 40px;
+  font-size: 16px;
+  color: #fff;
+  padding: 20px 45px 20px 20px;
+}
+
+.input-box input::placeholder {
+  color: rgb(111, 110, 110);
+  text-align: left;
+}
+
+.input-box i {
+  position: absolute;
+  right: 20px;
+  top: 30%;
+  transform: translate(-50%);
+  font-size: 20px;
+}
+
+.button_submit_create_team {
+  width: 100%;
+  font-family: "FontOne", sans-serif;
+  border-width: 5px;
+  border-radius: 0%;
+}
+
+.add-more {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 2%;
+  font-size: 16px;
+  color: rgb(111, 110, 110);
+}
+
+.add-more :hover {
+  color: white;
+}
+
+.action-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5%;
+}
+
+.error-message-space {
+  font-size: 16px;
+  color: gray;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 6%;
+}
+
+.close-icon-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close-icon-container :hover {
+  color: white;
+}
+
+.message-space {
+  font-size: 30px;
+  color: rgb(174, 173, 173);
+  display: flex;
+  justify-content: center;
+  margin-top: 6%;
+  margin-bottom: 3%;
+}
+
+.button_show_participant {
+  width: 100%;
+  font-family: "FontOne", sans-serif;
+  border-width: 5px;
+  border-radius: 30px;
+}
+
+.show-participant-container {
+  width: 100%;
+  min-height: 20vh;
+  padding: 4%;
+}
+
+.show-participant-box {
+  background: transparent;
+  border: 3px solid white;
+  backdrop-filter: blur(2px);
+  color: #fff;
+  border-radius: 12px;
+  padding: 3% 2%;
+  transition: all 0.3s ease-in-out;
+}
+
+.show-participant-box h1 {
+  font-family: "FontTwo", cursive;
+  font-size: 40px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.participant-content-container {
+  padding-left: 4%;
+  padding-right: 4%;
+  margin-top: 8%;
+}
+
+.participant-content {
+  margin-top: 4%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.participant-content-username {
+  font-size: 25px;
+}
+
+.participant-content-email {
+  font-size: 15px;
+}
+
+.join-team-container {
+  margin-top: 5%;
+}
+
+.join-team-container h1 {
+  font-family: "FontTwo", cursive;
+  font-size: 40px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.join-team-card-container {
+  background: transparent;
+  border: 3px solid white;
+  backdrop-filter: blur(2px);
+  color: #fff;
+  border-radius: 12px;
+  padding: 4% 4%;
+  transition: all 0.3s ease-in-out;
+  margin-top: 5%;
+}
+
+.join-team-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3%;
+}
+
+.team-name {
+  font-size: 25px;
+}
+
+.team-name p {
+  margin-bottom: 0%;
+}
+
+.join-team-slots-left {
+  font-size: 17px;
+  color: #7f7878;
+}
+
+.join-team-slots-left p {
+  margin-bottom: 0px;
+}
+
+.join-button {
+  display: flex;
+  justify-content: center;
+}
+
+.join-form-container {
+  width: 100%;
+  padding-top: 2%;
+}
+
+.join-team-card-action-bar {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 5%;
+}
+
+.join-team-card-button {
+  width: 40%;
+}

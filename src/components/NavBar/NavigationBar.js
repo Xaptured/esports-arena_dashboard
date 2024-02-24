@@ -5,14 +5,24 @@ import {
 } from '../../constants/NavBarConstants';
 import { useAtomValue, useAtom } from 'jotai';
 import { activeAdminTabsAtom, activeOrganizerTabsAtom, activeParticipantTabsAtom } from '../../atoms/activeTabsAtom';
-import { USERS, loggedInUserAtom } from '../../atoms/loginDataAtom';
+import { USERS, loggedInUserAtom, loggedInUserAtomCopy } from '../../atoms/loginDataAtom';
+import { useCopyValueAtom } from '../../atoms/loginDataAtom';
 
 export default function NavigationBar() {
 
+    // ESA-058-START
+    const useCopyAtom = useAtomValue(useCopyValueAtom);
+    let loggedInUserAtomResult;
+    if (useCopyAtom) {
+        loggedInUserAtomResult = loggedInUserAtomCopy;
+    } else {
+        loggedInUserAtomResult = loggedInUserAtom;
+    }
+    // ESA-058-END
     const [participantTabs, setParticipantTabs] = useAtom(activeParticipantTabsAtom);
     const [organizerTabs, setOrganizerTabs] = useAtom(activeOrganizerTabsAtom);
     const [adminTabs, setAdminTabs] = useAtom(activeAdminTabsAtom);
-    const loginData = useAtomValue(loggedInUserAtom);
+    const loginData = useAtomValue(loggedInUserAtomResult);
 
     const createComponentsArray = (tabs, index) => {
         const arr = new Array(tabs.length);
