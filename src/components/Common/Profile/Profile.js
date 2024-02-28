@@ -3,10 +3,10 @@ import './profile.css'
 import { LiaLongArrowAltRightSolid } from "react-icons/lia";
 import { useState } from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
-import { loggedInUserAtom, loggedInUserAtomCopy } from '../../atoms/loginDataAtom';
-import backendService from '../../services/backendService';
-import { profileStatusAtom } from '../../atoms/loginDataAtom'
-import { useCopyValueAtom } from '../../atoms/loginDataAtom';
+import { loggedInUserAtom, loggedInUserAtomCopy } from '../../../atoms/loginDataAtom';
+import backendService from '../../../services/backendService';
+import { profileStatusAtom } from '../../../atoms/loginDataAtom'
+import { useCopyValueAtom } from '../../../atoms/loginDataAtom';
 // import { Oval } from 'react-loader-spinner'
 
 export default function Profile() {

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import './eventdetails.css'
 import { useAtomValue } from 'jotai';
-import { eventDetailsAtom, eventDetailsAtomCopy } from '../../atoms/eventAtom';
-import { useCopyValueAtom } from '../../atoms/loginDataAtom';
+import { eventDetailsAtom, eventDetailsAtomCopy } from '../../../atoms/eventAtom';
+import { useCopyValueAtom } from '../../../atoms/loginDataAtom';
 import { RxCross2 } from "react-icons/rx";
-import backendService from '../../services/backendService';
-import { loggedInUserAtom, loggedInUserAtomCopy } from '../../atoms/loginDataAtom';
+import backendService from '../../../services/backendService';
+import { loggedInUserAtom, loggedInUserAtomCopy } from '../../../atoms/loginDataAtom';
 import JoinTeamCard from './JoinTeamCard';
 
 export default function EventDetails() {
@@ -50,7 +50,9 @@ export default function EventDetails() {
             setErrorMsg("Please fill the email.");
         } else {
             if (!isFieldUnique(val)) {
-                const response = await backendService.isProfilePresent(val);
+                // ESA-058 - uncomment below code
+                // const response = await backendService.isProfilePresent(val);
+                const response = true;
                 if (response) {
                     setErrorMsg('');
                     let counter = countPlayers;
@@ -224,66 +226,66 @@ export default function EventDetails() {
                         !isRegistered ?
                             <div className="event-forms">
                                 {
-                                    eventDetails.remainingSlots > 0 &&
+                                    eventDetails.remainingSlots > 0 && (
                                         !showCreateForm ?
-                                        <button type="button" className='btn btn-outline-light button_team' onClick={handleCreateTeamClick}>
-                                            CREATE A TEAM
-                                        </button>
-                                        :
-                                        <div className='create-team-form'>
-                                            <div className="form-box-create-team">
-                                                <form onSubmit={handleSubmit}>
-                                                    <div className="close-icon-container">
-                                                        <RxCross2 size={30} color="grey" onClick={handleCreateTeamClick} />
-                                                    </div>
+                                            <button type="button" className='btn btn-outline-light button_team' onClick={handleCreateTeamClick}>
+                                                CREATE A TEAM
+                                            </button>
+                                            :
+                                            <div className='create-team-form'>
+                                                <div className="form-box-create-team">
+                                                    <form onSubmit={handleSubmit}>
+                                                        <div className="close-icon-container">
+                                                            <RxCross2 size={30} color="grey" onClick={handleCreateTeamClick} />
+                                                        </div>
 
-                                                    <h1>Create a team</h1>
-                                                    <div className='mb-3 input-box'>
-                                                        <input
-                                                            type="text"
-                                                            placeholder="Team name"
-                                                            value={teamName}
-                                                            onChange={handleInputChangeTeamName}
-                                                            required />
-                                                        <i className='bx bxs-user'></i>
-                                                    </div>
-                                                    <i className='bx bxs-user'></i>
-                                                    {inputFields.map((inputField, index) => (
-                                                        <div key={index} className='mb-3 input-box'>
+                                                        <h1>Create a team</h1>
+                                                        <div className='mb-3 input-box'>
                                                             <input
-                                                                type="email"
-                                                                placeholder="Email"
-                                                                value={inputField}
-                                                                onChange={(event) => handleInputChange(index, event)}
-                                                                required
-                                                            />
+                                                                type="text"
+                                                                placeholder="Team name"
+                                                                value={teamName}
+                                                                onChange={handleInputChangeTeamName}
+                                                                required />
                                                             <i className='bx bxs-user'></i>
                                                         </div>
-                                                    ))}
-                                                    <div className="add-more">
-                                                        {
-                                                            countPlayers < eventDetails.playersPerSlot ?
-                                                                <label onClick={handleAddField} style={{ marginRight: '4%' }}>+Add more</label>
-                                                                :
-                                                                ''
-                                                        }
-                                                        {
-                                                            countPlayers > 1 ?
-                                                                <label onClick={handleCancelField}>-Cancel</label>
-                                                                :
-                                                                ''
-                                                        }
-                                                    </div>
-                                                    <div className="action-bar">
-                                                        <button type="submit" className='btn btn-outline-light button_submit_create_team' disabled={disableSubmit}>
-                                                            Submit
-                                                        </button>
-                                                    </div>
-                                                    {/* Use this space to show error messages */}
-                                                    <div className="error-message-space">{errorMsg}</div>
-                                                </form>
-                                            </div>
-                                        </div>
+                                                        <i className='bx bxs-user'></i>
+                                                        {inputFields.map((inputField, index) => (
+                                                            <div key={index} className='mb-3 input-box'>
+                                                                <input
+                                                                    type="email"
+                                                                    placeholder="Email"
+                                                                    value={inputField}
+                                                                    onChange={(event) => handleInputChange(index, event)}
+                                                                    required
+                                                                />
+                                                                <i className='bx bxs-user'></i>
+                                                            </div>
+                                                        ))}
+                                                        <div className="add-more">
+                                                            {
+                                                                countPlayers < eventDetails.playersPerSlot ?
+                                                                    <label onClick={handleAddField} style={{ marginRight: '4%' }}>+Add more</label>
+                                                                    :
+                                                                    ''
+                                                            }
+                                                            {
+                                                                countPlayers > 1 ?
+                                                                    <label onClick={handleCancelField}>-Cancel</label>
+                                                                    :
+                                                                    ''
+                                                            }
+                                                        </div>
+                                                        <div className="action-bar">
+                                                            <button type="submit" className='btn btn-outline-light button_submit_create_team' disabled={disableSubmit}>
+                                                                Submit
+                                                            </button>
+                                                        </div>
+                                                        {/* Use this space to show error messages */}
+                                                        <div className="error-message-space">{errorMsg}</div>
+                                                    </form>
+                                                </div>
+                                            </div>)
                                 }
                                 {
                                     !showJoinForm ?

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './eventdetails.css'
-import backendService from '../../services/backendService';
+import backendService from '../../../services/backendService';
 
 export default function JoinTeamCard(props) {
 
@@ -127,7 +127,7 @@ export default function JoinTeamCard(props) {
                                 ))}
                                 <div className="add-more">
                                     {
-                                        countPlayers < 2 ?
+                                        countPlayers < props.count ?
                                             <label onClick={handleAddField} style={{ marginRight: '4%' }}>+Add more</label>
                                             :
                                             ''
