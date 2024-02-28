@@ -11,6 +11,7 @@ export const eventDetailsAtomCopy = atom({
     duration: "1:00",
     playersPerSlot: 4,
     slotCount: 10,
+    remainingSlots: 8,
     type: "FREE",
     prizePool: 30000,
     rules: [

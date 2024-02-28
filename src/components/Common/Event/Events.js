@@ -3,11 +3,11 @@ import './event.css'
 import EventCard from './EventCard';
 import GetStartedEvent from './GetStartedEvent';
 import { useAtom, useAtomValue } from 'jotai';
-import { activeEventsAtom, eventDetailsAtom, activeEventsAtomCopy, eventDetailsAtomCopy } from '../../atoms/eventAtom';
+import { activeEventsAtom, eventDetailsAtom, activeEventsAtomCopy, eventDetailsAtomCopy } from '../../../atoms/eventAtom';
 import EventDetails from './EventDetails';
-import { loggedInUserAtom, loggedInUserAtomCopy } from '../../atoms/loginDataAtom';
-import backendService from '../../services/backendService'
-import { useCopyValueAtom } from '../../atoms/loginDataAtom';
+import { loggedInUserAtom, loggedInUserAtomCopy } from '../../../atoms/loginDataAtom';
+import backendService from '../../../services/backendService'
+import { useCopyValueAtom } from '../../../atoms/loginDataAtom';
 
 // need to refactor while working on organizer-event so that this component will be used for both.
 export default function Events() {

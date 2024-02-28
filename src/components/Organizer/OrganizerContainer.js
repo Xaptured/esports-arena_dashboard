@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './organizercontainer.css'
 import NavigationBar from '../NavBar/NavigationBar'
-import Events from '../Common/Events'
+import Events from '../Common/Event/Events'
 import News from '../Common/News'
 import Schedule from '../Common/Schedule'
 import Help from '../Common/Help'

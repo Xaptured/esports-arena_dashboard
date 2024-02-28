@@ -1,9 +1,9 @@
 import React from 'react'
 import './eventcard.css'
 import { useSetAtom, useAtomValue } from 'jotai'
-import { eventDetailsAtom, eventDetailsAtomCopy } from '../../atoms/eventAtom'
-import backendService from '../../services/backendService'
-import { useCopyValueAtom } from '../../atoms/loginDataAtom';
+import { eventDetailsAtom, eventDetailsAtomCopy } from '../../../atoms/eventAtom'
+import backendService from '../../../services/backendService'
+import { useCopyValueAtom } from '../../../atoms/loginDataAtom';
 
 export default function EventCard(props) {
 
