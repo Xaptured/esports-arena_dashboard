@@ -253,6 +253,20 @@ const backendService = {
             console.log("Error while fetching is profile present", error);
         }
     },
+
+    async getAllUpcomingOrganizerEvents(email) {
+        try {
+            const url = 'http://localhost:8086/events/get-upcoming-organizer-events/' + email;
+            const result = await fetch(url);
+            const jsonResult = await result.json();
+            if (!result.ok) {
+                throw new Error(jsonResult.message || 'Internal Server Error');
+            }
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while getting active events with respect to interested games", error);
+        }
+    },
 }
 
 export default backendService;
