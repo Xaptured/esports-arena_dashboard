@@ -32,7 +32,7 @@ export default function EventOrganizerDetails() {
                 </div>
             }
             {
-                !showJoinForm ?
+                !showTeams ?
                     <button type="button" className='btn btn-outline-light button_team' onClick={handleShowTeamsClick}>
                         SHOW TEAMS
                     </button>
