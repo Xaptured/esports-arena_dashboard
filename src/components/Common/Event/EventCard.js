@@ -37,7 +37,7 @@ export default function EventCard(props) {
         const response = await backendService.getEventDetails(eventName);
         // ESA-058: Uncomment below code
         // setEventOrganizerDetails(response);
-        setEventOrganizerDetails(activeOrganizerEventsResult);
+        setEventOrganizerDetails(eventOrganizerDetailsAtomResult);
     }
     return (
         <div className='event-card'>

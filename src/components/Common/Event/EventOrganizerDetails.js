@@ -5,6 +5,7 @@ import EventDetailSection from './EventDetailSection';
 import { useAtomValue } from 'jotai';
 import TeamCard from './TeamCard';
 import backendService from '../../../services/backendService'
+import { RxCross2 } from "react-icons/rx";
 
 
 export default function EventOrganizerDetails() {
@@ -15,9 +16,11 @@ export default function EventOrganizerDetails() {
         setShowTeams(!showTeams);
     }
     const getTeamsWithCount = async () => {
-        const teamDetailsResponse = await backendService.getTeamsWithCount(eventId, eventDetails.name);
+        const eventId = await backendService.getEventId('PUBG-EVENT');
+        const teamDetailsResponse = await backendService.getTeamsWithCount(eventId, eventOrganizerDetails.name);
         setTeamDetailsList(teamDetailsResponse);
     }
+
     useEffect(() => {
         getTeamsWithCount();
     }, []);
