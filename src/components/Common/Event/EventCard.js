@@ -1,7 +1,7 @@
 import React from 'react'
 import './eventcard.css'
 import { useSetAtom, useAtomValue } from 'jotai'
-import { eventDetailsAtom, eventDetailsAtomCopy, loggedInUserAtom, loggedInUserAtomCopy, eventOrganizerDetailsAtomCopy, eventOrganizerDetailsAtom } from '../../../atoms/eventAtom'
+import { eventDetailsAtom, eventDetailsAtomCopy, eventOrganizerDetailsAtomCopy, eventOrganizerDetailsAtom } from '../../../atoms/eventAtom'
 import backendService from '../../../services/backendService'
 import { useCopyValueAtom } from '../../../atoms/loginDataAtom';
 import { USERS, loggedInUserAtom, loggedInUserAtomCopy } from '../../../atoms/loginDataAtom';
