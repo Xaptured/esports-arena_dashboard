@@ -5,7 +5,7 @@ import Events from '../Common/Event/Events'
 import News from '../Common/News'
 import Schedule from '../Common/Schedule'
 import Help from '../Common/Help'
-import { activeParticipantTabsAtom } from '../../atoms/activeTabsAtom'
+import { activeOrganizerTabsAtom } from '../../atoms/activeTabsAtom'
 import { loggedInUserAtom, loggedInUserAtomCopy } from '../../atoms/loginDataAtom'
 import { useCopyValueAtom } from '../../atoms/loginDataAtom';
 import { profileStatusAtom } from '../../atoms/loginDataAtom'
@@ -14,7 +14,7 @@ import { useAtomValue, useAtom } from 'jotai'
 import backendService from '../../services/backendService'
 
 export default function OrganizerContainer() {
-    const organizerTabs = useAtomValue(activeParticipantTabsAtom);
+    const organizerTabs = useAtomValue(activeOrganizerTabsAtom);
     // ESA-058-START
     const useCopyAtom = useAtomValue(useCopyValueAtom);
     let loggedInUserAtomResult;
@@ -43,7 +43,7 @@ export default function OrganizerContainer() {
         <div className='container organizer-container'>
             <NavigationBar />
             {
-                !isProfileCompleted ?
+                !isProfileComplete ?
                     <Profile />
                     :
                     <>

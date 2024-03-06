@@ -9,6 +9,7 @@ import { USERS, loggedInUserAtom, loggedInUserAtomCopy } from '../../../atoms/lo
 import backendService from '../../../services/backendService'
 import { useCopyValueAtom } from '../../../atoms/loginDataAtom';
 import EventOrganizerDetails from './EventOrganizerDetails';
+import EventForm from './EventForm';
 
 // need to refactor while working on organizer-event so that this component will be used for both.
 export default function Events() {
@@ -30,9 +31,11 @@ export default function Events() {
     // ESA-058-END
     const loggedInUser = useAtomValue(loggedInUserAtomResult);
     const eventDetails = useAtomValue(eventDetailsAtom);
+    const eventOrganizerDetails = useAtomValue(eventOrganizerDetailsAtom);
     const [activeEvents, setActiveEvents] = useAtom(activeEventsAtomResult);
     const [activeOrgEvents, setActiveOrgEvents] = useAtom(activeOrganizerEventsResult);
-    const eventOrganizerDetails = useAtomValue(eventOrganizerDetailsAtom);
+    const [isShowEventForm, setIsShowEventForm] = useState(false);
+
 
 
     const getActiveEventsWrtIntGames = async () => {
@@ -45,6 +48,10 @@ export default function Events() {
         const response = await backendService.getAllUpcomingOrganizerEvents(loggedInUser.email);
         // ESA-058: should be uncommented
         // setActiveOrgEvents(response);
+    }
+
+    const showEventForm = () => {
+        setIsShowEventForm(!isShowEventForm);
     }
 
     useEffect(() => {
@@ -64,6 +71,7 @@ export default function Events() {
                                 <EventCard eventName={activeEvent.name} key={activeEvent.name} />
                             ))
                         }
+
                         {
                             loggedInUser.userType === USERS.ORGANIZER && activeOrgEvents && activeOrgEvents.map((activeOrgEvent) => (
                                 <EventCard eventName={activeOrgEvent.name} key={activeOrgEvent.name} />
@@ -76,14 +84,20 @@ export default function Events() {
                         loggedInUser.userType === USERS.PARTICIPANT && (eventDetails ?
                             <EventDetails />
                             :
-                            <GetStartedEvent />
+                            <GetStartedEvent userType='participant' />
                         )
                     }
                     {
-                        loggedInUser.userType === USERS.ORGANIZER && (eventOrganizerDetails ?
-                            <EventOrganizerDetails />
+                        loggedInUser.userType === USERS.ORGANIZER &&
+                        (isShowEventForm ?
+                            <EventForm showEventForm={showEventForm} />
                             :
-                            <GetStartedEvent />
+                            (
+                                eventOrganizerDetails ?
+                                    <EventOrganizerDetails />
+                                    :
+                                    <GetStartedEvent userType='organizer' showEventForm={showEventForm} />
+                            )
                         )
                     }
                 </div>

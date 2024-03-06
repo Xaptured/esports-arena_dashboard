@@ -1,6 +1,6 @@
 import React from 'react'
 import './eventcard.css'
-import { useSetAtom, useAtomValue } from 'jotai'
+import { useSetAtom, useAtomValue, useAtom } from 'jotai'
 import { eventDetailsAtom, eventDetailsAtomCopy, eventOrganizerDetailsAtomCopy, eventOrganizerDetailsAtom } from '../../../atoms/eventAtom'
 import backendService from '../../../services/backendService'
 import { useCopyValueAtom } from '../../../atoms/loginDataAtom';
@@ -37,7 +37,25 @@ export default function EventCard(props) {
         const response = await backendService.getEventDetails(eventName);
         // ESA-058: Uncomment below code
         // setEventOrganizerDetails(response);
-        setEventOrganizerDetails(eventOrganizerDetailsAtomResult);
+        setEventOrganizerDetails({
+            name: "PUBG-EVENT",
+            date: "12-12-2012",
+            time: "1:10:00",
+            duration: "1:00",
+            playersPerSlot: 4,
+            slotCount: 10,
+            remainingSlots: 8,
+            type: "FREE",
+            prizePool: 30000,
+            rules: [
+                {
+                    description: "rule-1"
+                },
+                {
+                    description: "rule-2"
+                }
+            ]
+        });
     }
     return (
         <div className='event-card'>
