@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './eventdetails.css'
 import { eventOrganizerDetailsAtom } from '../../../atoms/eventAtom';
 import EventDetailSection from './EventDetailSection';
-import { useAtomValue } from 'jotai';
+import { useAtom } from 'jotai';
 import TeamCard from './TeamCard';
 import backendService from '../../../services/backendService'
 import { RxCross2 } from "react-icons/rx";
@@ -11,7 +11,7 @@ import { RxCross2 } from "react-icons/rx";
 export default function EventOrganizerDetails() {
     const [showTeams, setShowTeams] = useState(false);
     const [teamDetailsList, setTeamDetailsList] = useState(null);
-    const eventOrganizerDetails = useAtomValue(eventOrganizerDetailsAtom);
+    const [eventOrganizerDetails, setEventOrganizerDetails] = useAtom(eventOrganizerDetailsAtom);
     const handleShowTeamsClick = () => {
         setShowTeams(!showTeams);
     }
@@ -34,6 +34,10 @@ export default function EventOrganizerDetails() {
                 remainingPlayers: 1
             }
         ])
+    }
+
+    const closeEventOrganizerDetails = () => {
+        setEventOrganizerDetails(null);
     }
 
     useEffect(() => {
@@ -62,6 +66,9 @@ export default function EventOrganizerDetails() {
                                 }
                             </div>
                     }
+                    <button type="button" className='btn btn-outline-light button_team' onClick={closeEventOrganizerDetails}>
+                        Close
+                    </button>
                 </div>
             }
 

@@ -45,3 +45,16 @@
   background-color: #7f7878;
   border-radius: 8px;
 }
+
+.wrapper-create-event {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 10%;
+}
+
+.button-create-event {
+  width: 80%;
+  font-family: "FontOne", sans-serif;
+  border-width: 3px;
+  border-radius: 30px;
+}

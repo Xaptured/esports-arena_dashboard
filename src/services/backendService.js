@@ -267,6 +267,24 @@ const backendService = {
             console.log("Error while getting active events with respect to interested games", error);
         }
     },
+
+    async saveEvent(event) {
+        try {
+            const result = await fetch('http://localhost:8086/events/save-event?isCreate=true&isUpdate=false', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(event)
+            });
+
+            const jsonResult = await result.json();
+
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while saving event data", error);
+        }
+    },
 }
 
 export default backendService;

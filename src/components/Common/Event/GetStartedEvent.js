@@ -1,4 +1,5 @@
 import React from 'react'
+import './event.css'
 
 export default function GetStartedEvent(props) {
     const { userType, showEventForm } = props;
@@ -19,9 +20,11 @@ export default function GetStartedEvent(props) {
                 userType === "participant" ? ''
                     : <>
                         <p style={{ marginBottom: '5%' }}>or Create a new event</p>
-                        <button type="button" className='btn btn-outline-light button_team' onClick={showForm}>
-                            Create Event
-                        </button>
+                        <div className='wrapper-create-event'>
+                            <button type="button" className='btn btn-outline-light button-create-event' onClick={showForm}>
+                                Create Event
+                            </button>
+                        </div>
                     </>
             }
         </div>
