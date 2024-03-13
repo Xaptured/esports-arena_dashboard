@@ -11,7 +11,6 @@ import { useCopyValueAtom } from '../../../atoms/loginDataAtom';
 import EventOrganizerDetails from './EventOrganizerDetails';
 import EventForm from './EventForm';
 
-// need to refactor while working on organizer-event so that this component will be used for both.
 export default function Events() {
 
     // ESA-058-START
@@ -36,8 +35,6 @@ export default function Events() {
     const [activeOrgEvents, setActiveOrgEvents] = useAtom(activeOrganizerEventsResult);
     const [isShowEventForm, setIsShowEventForm] = useState(false);
 
-
-
     const getActiveEventsWrtIntGames = async () => {
         const response = await backendService.getActiveEventsWrtInterestedGamesData(loggedInUser.email);
         // ESA-058: should be uncommented
@@ -60,7 +57,7 @@ export default function Events() {
         } else {
             getAllUpcomingOrganizerEvents();
         }
-    }, []);
+    }, [activeEvents]);
     return (
         <div className='container event-container'>
             <div className='event-content'>

@@ -20,6 +20,7 @@ export default function EventOrganizerDetails() {
     }
 
     const getTeamsWithCount = async () => {
+        // ESA-058:change event name
         const response = await backendService.getEventId('PUBG-EVENT');
         // ESA-058:change event id to response
         setEventId(1);
@@ -28,15 +29,15 @@ export default function EventOrganizerDetails() {
         // setTeamDetailsList(teamDetailsResponse);
         setTeamDetailsList([
             {
-                teamName: "TEAM-ONE",
+                teamName: "first-team",
                 remainingPlayers: 2
             },
             {
-                teamName: "TEAM-TWO",
+                teamName: "second-team",
                 remainingPlayers: 0
             },
             {
-                teamName: "TEAM-THREE",
+                teamName: "third-team",
                 remainingPlayers: 1
             }
         ])
@@ -47,6 +48,7 @@ export default function EventOrganizerDetails() {
     }
 
     const generateExcel = async () => {
+        // ESA-058:change event id
         await backendService.generateExcel(1);
     }
 
@@ -81,7 +83,6 @@ export default function EventOrganizerDetails() {
                                 }
                             </div>)
                     }
-                    {/* add button for generate excel which calls the backend API */}
                     {(eventOrganizerDetails.status === 'ONGOING' || eventOrganizerDetails.status === 'COMPLETED') &&
                         <button type="button" className='btn btn-outline-light button_team' onClick={generateExcel}>
                             Generate Sheet
@@ -89,7 +90,6 @@ export default function EventOrganizerDetails() {
                     }
                     {
                         eventOrganizerDetails.status === 'COMPLETED' && <div>
-                            {/* Leaderboard Component : props - eventId*/}
                             <Leaderboard eventId={eventId} />
                         </div>
                     }

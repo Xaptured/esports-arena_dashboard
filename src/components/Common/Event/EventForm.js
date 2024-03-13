@@ -42,7 +42,7 @@ export default function EventForm(props) {
     const [inputFields, setInputFields] = useState(['']);
     const [errorMsg, setErrorMsg] = useState('');
 
-    // TODO: in useEffect add call to get games
+    // ESA-058: in useEffect add call to get games
     const gameOptions = [
         { name: 'PUBG' },
         { name: 'BGMI' },
@@ -58,7 +58,7 @@ export default function EventForm(props) {
         const dateObject = new Date(date);
 
         const year = dateObject.getFullYear();
-        const month = (dateObject.getMonth() + 1).toString().padStart(2, '0'); // Adding 1 to get months starting from 1
+        const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
         const day = dateObject.getDate().toString().padStart(2, '0');
 
         const formattedDate = `${year}-${month}-${day}`;

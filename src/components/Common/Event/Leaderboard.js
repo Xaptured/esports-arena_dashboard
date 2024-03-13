@@ -30,7 +30,7 @@ export default function Leaderboard(props) {
     const handleUpload = async () => {
         await backendService.saveLeaderboardDocument(file, props.eventId)
     };
-    // TODO: in useEffect add call to get teams
+    // ESA-058: in useEffect add call to get teams
     const teamOptions = [
         { name: 'first-team', id: 1 },
         { name: 'second-team', id: 2 },
