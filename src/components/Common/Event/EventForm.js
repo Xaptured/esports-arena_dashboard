@@ -8,21 +8,27 @@ import "primeicons/primeicons.css";
 import './eventform.css';
 import { loggedInUserAtom, loggedInUserAtomCopy } from '../../../atoms/loginDataAtom';
 import { useCopyValueAtom } from '../../../atoms/loginDataAtom';
-import { useAtomValue } from 'jotai';
+import { useAtomValue, useAtom } from 'jotai';
 import backendService from '../../../services/backendService';
+import { activeOrganizerEventsCopy, activeOrganizerEvents } from '../../../atoms/eventAtom';
+
 
 export default function EventForm(props) {
 
     // ESA-058-START
     const useCopyAtom = useAtomValue(useCopyValueAtom);
+    let activeOrganizerEventsResult;
     let loggedInUserAtomResult;
     if (useCopyAtom) {
         loggedInUserAtomResult = loggedInUserAtomCopy;
+        activeOrganizerEventsResult = activeOrganizerEventsCopy;
     } else {
         loggedInUserAtomResult = loggedInUserAtom;
+        activeOrganizerEventsResult = activeOrganizerEvents;
     }
     // ESA-058-END
     const loggedInUser = useAtomValue(loggedInUserAtomResult);
+    const [activeOrgEvents, setActiveOrgEvents] = useAtom(activeOrganizerEventsResult);
     const { showEventForm } = props;
     const [eventName, setEventName] = useState(null);
     const [selectedGame, setSelectedGame] = useState(null);
@@ -36,6 +42,7 @@ export default function EventForm(props) {
     const [inputFields, setInputFields] = useState(['']);
     const [errorMsg, setErrorMsg] = useState('');
 
+    // TODO: in useEffect add call to get games
     const gameOptions = [
         { name: 'PUBG' },
         { name: 'BGMI' },
@@ -92,6 +99,17 @@ export default function EventForm(props) {
             rules: rulesPayloadArray(inputFields)
         };
         const response = await backendService.saveEvent(payload);
+        if (response.message === 'Request Processed') {
+            const activeEvents = [...activeOrgEvents];
+            const newEvent = {
+                name: eventName
+            };
+            activeEvents.unshift(newEvent);
+            setActiveOrgEvents(activeEvents);
+            setErrorMsg('Event successfully saved and pending from admin.');
+        } else {
+            setErrorMsg('Something went wrong. Please try again later.');
+        }
     }
 
     const handleInputChangeEventName = (e) => {

@@ -285,6 +285,76 @@ const backendService = {
             console.log("Error while saving event data", error);
         }
     },
+
+    async generateExcel(eventId) {
+        try {
+            const url = 'http://localhost:8086/events/create-sheet/' + eventId;
+            const response = await fetch(url);
+            const blob = await response.blob();
+
+            const downloadLink = document.createElement('a');
+            downloadLink.href = window.URL.createObjectURL(blob);
+            downloadLink.download = 'Teams.xlsx';
+            downloadLink.click();
+        } catch (error) {
+            console.log("Error while generating excel", error);
+        }
+    },
+
+    async saveLeaderboard(leaderboard) {
+        try {
+            const result = await fetch('http://localhost:8086/events/save-leaderboard', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(leaderboard)
+            });
+
+            const jsonResult = await result.json();
+
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while saving leaderboard data", error);
+        }
+    },
+
+    async saveLeaderboardDocument(file, eventId) {
+        try {
+            const url = 'http://localhost:8086/events/save-documents/' + eventId;
+
+            const formData = new FormData();
+            formData.append('doc', file);
+
+            const result = await fetch(url, {
+                method: 'POST',
+                body: formData
+            });
+
+            const jsonResult = await result.json();
+
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while saving leaderboard documents", error);
+        }
+    },
+
+    async updateTeamStatus(status, teamName) {
+        try {
+            const url = 'http://localhost:8086/events/update-team-status?teamStatus=' + status + '&teamName=' + teamName;
+
+            const result = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            return result.text();
+        } catch (error) {
+            console.log("Error while updating team status", error);
+        }
+    },
 }
 
 export default backendService;

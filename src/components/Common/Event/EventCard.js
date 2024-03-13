@@ -42,10 +42,11 @@ export default function EventCard(props) {
             date: "12-12-2012",
             time: "1:10:00",
             duration: "1:00",
+            status: 'ACTIVE',
             playersPerSlot: 4,
             slotCount: 10,
             remainingSlots: 8,
-            type: "FREE",
+            type: "PAID",
             prizePool: 30000,
             rules: [
                 {

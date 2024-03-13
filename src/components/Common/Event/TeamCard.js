@@ -1,7 +1,16 @@
 import React from 'react'
 import './eventdetails.css'
+import backendService from '../../../services/backendService'
+import { useState } from 'react'
 
 export default function TeamCard(props) {
+    const [showButton, setShowButton] = useState(true);
+    const handleApprove = async () => {
+        const response = await backendService.updateTeamStatus('PAID', props.teamName);
+        if (response === 'Request Processed') {
+            setShowButton(false);
+        }
+    }
     return (
         <div className='join-team-card-container'>
             <div className='join-team-header'>
@@ -30,7 +39,19 @@ export default function TeamCard(props) {
                     )
                 }
             </div>
+            {
+                props.type === 'PAID' && (
+                    showButton ?
+                        <div className="action-bar-leaderboard">
+                            <button className='btn btn-outline-light button_event_form' onClick={handleApprove}>Approve</button>
+                        </div>
+                        :
+                        <div className='confirm-message-space'>
+                            Approved
+                        </div>
+                )
 
+            }
 
         </div>
     )
