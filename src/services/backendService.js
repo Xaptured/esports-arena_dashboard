@@ -355,6 +355,20 @@ const backendService = {
             console.log("Error while updating team status", error);
         }
     },
+
+    async isLeaderboardComplete(eventId) {
+        try {
+            const url = 'http://localhost:8086/events/is-leaderboard-complete/' + eventId;
+
+            const result = await fetch(url);
+
+            const jsonResult = await result.json();
+
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while is leaderboard complete", error);
+        }
+    },
 }
 
 export default backendService;

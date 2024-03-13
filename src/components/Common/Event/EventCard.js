@@ -42,7 +42,7 @@ export default function EventCard(props) {
             date: "12-12-2012",
             time: "1:10:00",
             duration: "1:00",
-            status: 'ACTIVE',
+            status: 'COMPLETED',
             playersPerSlot: 4,
             slotCount: 10,
             remainingSlots: 8,

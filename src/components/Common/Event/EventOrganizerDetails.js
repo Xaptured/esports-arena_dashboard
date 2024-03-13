@@ -14,6 +14,7 @@ export default function EventOrganizerDetails() {
     const [teamDetailsList, setTeamDetailsList] = useState(null);
     const [eventOrganizerDetails, setEventOrganizerDetails] = useAtom(eventOrganizerDetailsAtom);
     const [eventId, setEventId] = useState(null);
+    const [isLeaderboardComplete, setIsLeaderboardComplete] = useState(false);
 
     const handleShowTeamsClick = () => {
         setShowTeams(!showTeams);
@@ -40,7 +41,9 @@ export default function EventOrganizerDetails() {
                 teamName: "third-team",
                 remainingPlayers: 1
             }
-        ])
+        ]);
+        const isLeaderComplete = await backendService.isLeaderboardComplete(1);
+        setIsLeaderboardComplete(isLeaderComplete);
     }
 
     const closeEventOrganizerDetails = () => {
@@ -83,13 +86,13 @@ export default function EventOrganizerDetails() {
                                 }
                             </div>)
                     }
-                    {(eventOrganizerDetails.status === 'ONGOING' || eventOrganizerDetails.status === 'COMPLETED') &&
+                    {!isLeaderboardComplete && (eventOrganizerDetails.status === 'ONGOING' || eventOrganizerDetails.status === 'COMPLETED') &&
                         <button type="button" className='btn btn-outline-light button_team' onClick={generateExcel}>
                             Generate Sheet
                         </button>
                     }
                     {
-                        eventOrganizerDetails.status === 'COMPLETED' && <div>
+                        !isLeaderboardComplete && eventOrganizerDetails.status === 'COMPLETED' && <div>
                             <Leaderboard eventId={eventId} />
                         </div>
                     }
