@@ -253,6 +253,122 @@ const backendService = {
             console.log("Error while fetching is profile present", error);
         }
     },
+
+    async getAllUpcomingOrganizerEvents(email) {
+        try {
+            const url = 'http://localhost:8086/events/get-upcoming-organizer-events/' + email;
+            const result = await fetch(url);
+            const jsonResult = await result.json();
+            if (!result.ok) {
+                throw new Error(jsonResult.message || 'Internal Server Error');
+            }
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while getting active events with respect to interested games", error);
+        }
+    },
+
+    async saveEvent(event) {
+        try {
+            const result = await fetch('http://localhost:8086/events/save-event?isCreate=true&isUpdate=false', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(event)
+            });
+
+            const jsonResult = await result.json();
+
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while saving event data", error);
+        }
+    },
+
+    async generateExcel(eventId) {
+        try {
+            const url = 'http://localhost:8086/events/create-sheet/' + eventId;
+            const response = await fetch(url);
+            const blob = await response.blob();
+
+            const downloadLink = document.createElement('a');
+            downloadLink.href = window.URL.createObjectURL(blob);
+            downloadLink.download = 'Teams.xlsx';
+            downloadLink.click();
+        } catch (error) {
+            console.log("Error while generating excel", error);
+        }
+    },
+
+    async saveLeaderboard(leaderboard) {
+        try {
+            const result = await fetch('http://localhost:8086/events/save-leaderboard', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(leaderboard)
+            });
+
+            const jsonResult = await result.json();
+
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while saving leaderboard data", error);
+        }
+    },
+
+    async saveLeaderboardDocument(file, eventId) {
+        try {
+            const url = 'http://localhost:8086/events/save-documents/' + eventId;
+
+            const formData = new FormData();
+            formData.append('doc', file);
+
+            const result = await fetch(url, {
+                method: 'POST',
+                body: formData
+            });
+
+            const jsonResult = await result.json();
+
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while saving leaderboard documents", error);
+        }
+    },
+
+    async updateTeamStatus(status, teamName) {
+        try {
+            const url = 'http://localhost:8086/events/update-team-status?teamStatus=' + status + '&teamName=' + teamName;
+
+            const result = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            return result.text();
+        } catch (error) {
+            console.log("Error while updating team status", error);
+        }
+    },
+
+    async isLeaderboardComplete(eventId) {
+        try {
+            const url = 'http://localhost:8086/events/is-leaderboard-complete/' + eventId;
+
+            const result = await fetch(url);
+
+            const jsonResult = await result.json();
+
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while is leaderboard complete", error);
+        }
+    },
 }
 
 export default backendService;
