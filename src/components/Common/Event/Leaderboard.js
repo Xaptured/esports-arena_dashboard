@@ -83,7 +83,7 @@ export default function Leaderboard(props) {
                                             <div className='leaderboard-container'>
                                                 <div className="mb-3 input-box">
                                                     <Dropdown value={selectedTeam} onChange={(e) => setSelectedTeam(e.value)} options={teamOptions} optionLabel="name"
-                                                        placeholder="Select a game" className="customDropdown" panelClassName='customPanelDropdown' />
+                                                        placeholder="Select winning team" className="customDropdown" panelClassName='customPanelDropdown' />
                                                 </div>
                                                 <div className="action-bar-leaderboard">
                                                     <button type="submit" className='btn btn-outline-light button_event_form'>

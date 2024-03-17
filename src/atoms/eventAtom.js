@@ -3,8 +3,8 @@ import { atom } from "jotai";
 export const eventDetailsAtom = atom(undefined);
 
 export const activeEventsAtom = atom(undefined);
-
-export const activeOrganizerEvents = atom(undefined);
+// FIX
+export const activeOrganizerEvents = atom([]);
 
 export const eventOrganizerDetailsAtom = atom(undefined);
 
