@@ -11,7 +11,7 @@ const user = {
     email: '',
 }
 const userCopy = {
-    userType: 'organizer',
+    userType: 'participant',
     email: 'jk19011999@gmail.com',
 }
 

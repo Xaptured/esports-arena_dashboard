@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import './organizercontainer.css'
 import NavigationBar from '../NavBar/NavigationBar'
 import Events from '../Common/Event/Events'
-import News from '../Common/News'
+import Leaderboards from '../Common/Leaderboards/Leaderboards'
 import Schedule from '../Common/Schedule'
 import Help from '../Common/Help'
 import { activeOrganizerTabsAtom } from '../../atoms/activeTabsAtom'
@@ -31,8 +31,8 @@ export default function OrganizerContainer() {
         const response = await backendService.isProfileComplete(loggedInUser.email);
         // ESA-058: Uncomment below code
         // FIX
-        setProfileComplete(response.profileComplete);
-        // setProfileComplete(true);
+        // setProfileComplete(response.profileComplete);
+        setProfileComplete(true);
     }
 
     useEffect(() => {
@@ -49,7 +49,7 @@ export default function OrganizerContainer() {
                     :
                     <>
                         {organizerTabs[0] && <Events />}
-                        {organizerTabs[1] && <News />}
+                        {organizerTabs[1] && <Leaderboards />}
                         {organizerTabs[2] && <Schedule />}
                         {organizerTabs[3] && <Help />}
                     </>

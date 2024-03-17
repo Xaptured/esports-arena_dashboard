@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import './participantcontainer.css'
 import NavigationBar from '../NavBar/NavigationBar'
 import Events from '../Common/Event/Events'
-import News from '../Common/News'
+import Leaderboards from '../Common/Leaderboards/Leaderboards'
 import Schedule from '../Common/Schedule'
 import Coins from '../Common/Coins'
 import Help from '../Common/Help'
@@ -52,7 +52,7 @@ export default function ParticipantContainer() {
                     (
                         <>
                             {participantTabs[0] && <Events />}
-                            {participantTabs[1] && <News />}
+                            {participantTabs[1] && <Leaderboards />}
                             {participantTabs[2] && <Schedule />}
                             {participantTabs[3] && <Coins />}
                             {participantTabs[4] && <Help />}
