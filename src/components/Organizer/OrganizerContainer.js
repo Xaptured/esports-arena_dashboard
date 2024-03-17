@@ -30,8 +30,9 @@ export default function OrganizerContainer() {
     const isProfileCompleted = async () => {
         const response = await backendService.isProfileComplete(loggedInUser.email);
         // ESA-058: Uncomment below code
-        // setProfileComplete(response.isProfileComplete);
-        setProfileComplete(true);
+        // FIX
+        setProfileComplete(response.profileComplete);
+        // setProfileComplete(true);
     }
 
     useEffect(() => {
