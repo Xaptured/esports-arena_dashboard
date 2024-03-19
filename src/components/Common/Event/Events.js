@@ -57,7 +57,7 @@ export default function Events() {
         } else {
             getAllUpcomingOrganizerEvents();
         }
-    }, [activeEvents]);
+    }, []);
     return (
         <div className='container event-container'>
             <div className='event-content'>

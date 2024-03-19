@@ -64,3 +64,26 @@
   border-width: 3px;
   border-radius: 0%;
 }
+
+.leaderboard-table {
+  border: 1px solid rgb(130, 126, 126);
+  border-radius: 5px;
+  padding: 5%;
+  background: transparent;
+  backdrop-filter: blur(3px);
+  margin-top: 5%;
+}
+
+.table-heading {
+  display: flex;
+  justify-content: space-between;
+  font-size: 27px;
+}
+
+.table-data {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  padding-left: 5%;
+  padding-right: 5%;
+}

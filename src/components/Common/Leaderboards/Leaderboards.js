@@ -7,6 +7,7 @@ import { inactiveEventsAtom, eventDetailsAtom, inactiveEventsAtomCopy, eventDeta
 import { USERS, loggedInUserAtom, loggedInUserAtomCopy } from '../../../atoms/loginDataAtom';
 import LeaderboardEventCard from './LeaderboardEventCard';
 import LeaderboardEventDetails from './LeaderboardEventDetails';
+import backendService from '../../../services/backendService'
 
 
 export default function Leaderboards() {
@@ -31,6 +32,25 @@ export default function Leaderboards() {
     const eventOrganizerDetails = useAtomValue(eventOrganizerDetailsAtom);
     const [inctiveEvents, setInActiveEvents] = useAtom(inactiveEventsAtomResult);
     const [inactiveOrgEvents, setInActiveOrgEvents] = useAtom(inactiveOrganizerEventsResult);
+
+    const findAllLeaderboardCompleteParticipantEvents = async () => {
+        const response = await backendService.findAllLeaderboardCompleteParticipantEvents(loggedInUser.email);
+        // ESA-058: should be uncommented
+        // setInActiveEvents(response);
+    }
+
+    const findAllLeaderboardCompleteOrganizerEvents = async () => {
+        const response = await backendService.findAllLeaderboardCompleteOrganizerEvents(loggedInUser.email);
+        // ESA-058: should be uncommented
+        // setInActiveOrgEvents(response);
+    }
+    useEffect(() => {
+        if (loggedInUser.userType === USERS.PARTICIPANT) {
+            findAllLeaderboardCompleteParticipantEvents();
+        } else {
+            findAllLeaderboardCompleteOrganizerEvents();
+        }
+    }, []);
     return (
         <div className='container leaderboard-tab-container'>
             <div className='leaaderboard-content'>
