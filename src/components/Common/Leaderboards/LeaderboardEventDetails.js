@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useAtomValue, useAtom } from 'jotai';
 import { eventDetailsAtom, eventDetailsAtomCopy, eventOrganizerDetailsAtom } from '../../../atoms/eventAtom';
 import { USERS, useCopyValueAtom } from '../../../atoms/loginDataAtom';
@@ -37,7 +37,7 @@ export default function LeaderboardEventDetails() {
     const fetchLeaderboardData = async () => {
         // ESA-058: uncomment below code
         const id = await getEventId();
-        const response = await backendService.getLeaderboard(id, email);
+        const response = await backendService.getLeaderboard(id, loggedInUser.email);
         // ESA-058: uncomment below code
         // setLeaderboard(response);
     }

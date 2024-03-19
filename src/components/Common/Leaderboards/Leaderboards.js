@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import GetStartedLeaderboard from './GetStartedLeaderboard'
 import './leaderboard.css'
 import { useCopyValueAtom } from '../../../atoms/loginDataAtom';
