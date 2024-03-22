@@ -282,9 +282,37 @@ const backendService = {
         }
     },
 
+    async findAllScheduledParticipantEvents(email) {
+        try {
+            const url = 'http://localhost:8086/events/get-upcoming-events/' + email;
+            const result = await fetch(url);
+            const jsonResult = await result.json();
+            if (!result.ok) {
+                throw new Error(jsonResult.message || 'Internal Server Error');
+            }
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while getting completed events for participant", error);
+        }
+    },
+
     async findAllLeaderboardCompleteOrganizerEvents(email) {
         try {
             const url = 'http://localhost:8086/events/get-completed-events-organizer/' + email;
+            const result = await fetch(url);
+            const jsonResult = await result.json();
+            if (!result.ok) {
+                throw new Error(jsonResult.message || 'Internal Server Error');
+            }
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while getting completed events for organizer", error);
+        }
+    },
+
+    async findAllScheduledeOrganizerEvents(email) {
+        try {
+            const url = 'http://localhost:8086/events/get-only-active-events-organizer/' + email;
             const result = await fetch(url);
             const jsonResult = await result.json();
             if (!result.ok) {

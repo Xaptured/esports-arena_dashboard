@@ -10,6 +10,10 @@ export const inactiveEventsAtom = atom([]);
 
 export const inactiveOrganizerEvents = atom([]);
 
+export const futureEventsAtom = atom([]);
+
+export const futureOrganizerEvents = atom([]);
+
 export const eventOrganizerDetailsAtom = atom(undefined);
 
 export const eventDetailsAtomCopy = atom({
@@ -151,7 +155,73 @@ export const inactiveEventsAtomCopy = atom([
     }
 ]);
 
+export const futureEventsAtomCopy = atom([
+    {
+        name: "PUBG-EVENT"
+    },
+    {
+        name: "BGMI-EVENT"
+    },
+    {
+        name: "PUBG-EVENT"
+    },
+    {
+        name: "BGMI-EVENT"
+    },
+    {
+        name: "PUBG-EVENT"
+    },
+    {
+        name: "BGMI-EVENT"
+    },
+    {
+        name: "PUBG-EVENT"
+    },
+    {
+        name: "BGMI-EVENT"
+    },
+    {
+        name: "PUBG-EVENT"
+    },
+    {
+        name: "BGMI-EVENT"
+    }
+]);
+
 export const inactiveOrganizerEventsCopy = atom([
+    {
+        name: "PUBG-EVENT"
+    },
+    {
+        name: "BGMI-EVENT"
+    },
+    {
+        name: "PUBG-EVENT"
+    },
+    {
+        name: "BGMI-EVENT"
+    },
+    {
+        name: "PUBG-EVENT"
+    },
+    {
+        name: "BGMI-EVENT"
+    },
+    {
+        name: "PUBG-EVENT"
+    },
+    {
+        name: "BGMI-EVENT"
+    },
+    {
+        name: "PUBG-EVENT"
+    },
+    {
+        name: "BGMI-EVENT"
+    }
+]);
+
+export const futureOrganizerEventsCopy = atom([
     {
         name: "PUBG-EVENT"
     },
