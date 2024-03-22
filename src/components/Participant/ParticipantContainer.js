@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import './participantcontainer.css'
 import NavigationBar from '../NavBar/NavigationBar'
 import Events from '../Common/Event/Events'
-import News from '../Common/News'
-import Schedule from '../Common/Schedule'
+import Leaderboards from '../Common/Leaderboards/Leaderboards'
+import Schedule from '../Common/Schedules/Schedules'
 import Coins from '../Common/Coins'
 import Help from '../Common/Help'
 import { useAtomValue, useAtom } from 'jotai'
@@ -52,10 +52,11 @@ export default function ParticipantContainer() {
                     (
                         <>
                             {participantTabs[0] && <Events />}
-                            {participantTabs[1] && <News />}
+                            {participantTabs[1] && <Leaderboards />}
                             {participantTabs[2] && <Schedule />}
-                            {participantTabs[3] && <Coins />}
-                            {participantTabs[4] && <Help />}
+                            {/* Need to think this coins: future scope */}
+                            {/* {participantTabs[3] && <Coins />} */}
+                            {participantTabs[3] && <Help />}
                         </>
                     )
             }
