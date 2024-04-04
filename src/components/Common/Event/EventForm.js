@@ -28,7 +28,8 @@ export default function EventForm(props) {
     }
     // ESA-058-END
     const loggedInUser = useAtomValue(loggedInUserAtomResult);
-    const [activeOrgEvents, setActiveOrgEvents] = useAtom(activeOrganizerEventsResult);
+    // ESA-058=used direct atom instead of atomResult
+    const [activeOrgEvents, setActiveOrgEvents] = useAtom(activeOrganizerEvents);
     const { showEventForm } = props;
     const [eventName, setEventName] = useState(null);
     const [selectedGame, setSelectedGame] = useState(null);

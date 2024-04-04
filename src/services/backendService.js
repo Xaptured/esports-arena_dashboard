@@ -268,6 +268,62 @@ const backendService = {
         }
     },
 
+    async findAllLeaderboardCompleteParticipantEvents(email) {
+        try {
+            const url = 'http://localhost:8086/events/get-completed-events-participant/' + email;
+            const result = await fetch(url);
+            const jsonResult = await result.json();
+            if (!result.ok) {
+                throw new Error(jsonResult.message || 'Internal Server Error');
+            }
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while getting completed events for participant", error);
+        }
+    },
+
+    async findAllScheduledParticipantEvents(email) {
+        try {
+            const url = 'http://localhost:8086/events/get-upcoming-events/' + email;
+            const result = await fetch(url);
+            const jsonResult = await result.json();
+            if (!result.ok) {
+                throw new Error(jsonResult.message || 'Internal Server Error');
+            }
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while getting completed events for participant", error);
+        }
+    },
+
+    async findAllLeaderboardCompleteOrganizerEvents(email) {
+        try {
+            const url = 'http://localhost:8086/events/get-completed-events-organizer/' + email;
+            const result = await fetch(url);
+            const jsonResult = await result.json();
+            if (!result.ok) {
+                throw new Error(jsonResult.message || 'Internal Server Error');
+            }
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while getting completed events for organizer", error);
+        }
+    },
+
+    async findAllScheduledeOrganizerEvents(email) {
+        try {
+            const url = 'http://localhost:8086/events/get-only-active-events-organizer/' + email;
+            const result = await fetch(url);
+            const jsonResult = await result.json();
+            if (!result.ok) {
+                throw new Error(jsonResult.message || 'Internal Server Error');
+            }
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while getting completed events for organizer", error);
+        }
+    },
+
     async saveEvent(event) {
         try {
             const result = await fetch('http://localhost:8086/events/save-event?isCreate=true&isUpdate=false', {
@@ -367,6 +423,34 @@ const backendService = {
             return jsonResult;
         } catch (error) {
             console.log("Error while is leaderboard complete", error);
+        }
+    },
+
+    async getTeamsWithPoints(eventId) {
+        try {
+            const url = 'http://localhost:8086/events/get-teams-with-points/' + eventId;
+
+            const result = await fetch(url);
+
+            const jsonResult = await result.json();
+
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while getting teams with points", error);
+        }
+    },
+
+    async getLeaderboard(eventId, email) {
+        try {
+            const url = 'http://localhost:8086/events/get-leaderboard/' + email + '?eventId=' + eventId;
+
+            const result = await fetch(url);
+
+            const jsonResult = await result.json();
+
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while getting leaderboard data", error);
         }
     },
 }

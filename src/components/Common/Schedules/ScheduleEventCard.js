@@ -1,13 +1,13 @@
 import React from 'react'
-import './eventcard.css'
+import './schedule.css'
 import { useSetAtom, useAtomValue, useAtom } from 'jotai'
 import { eventDetailsAtom, eventDetailsAtomCopy, eventOrganizerDetailsAtomCopy, eventOrganizerDetailsAtom } from '../../../atoms/eventAtom'
-import backendService from '../../../services/backendService'
 import { useCopyValueAtom } from '../../../atoms/loginDataAtom';
 import { USERS, loggedInUserAtom, loggedInUserAtomCopy } from '../../../atoms/loginDataAtom';
+import backendService from '../../../services/backendService'
 
-export default function EventCard(props) {
 
+export default function ScheduleEventCard(props) {
     // ESA-058-START
     const useCopyAtom = useAtomValue(useCopyValueAtom);
     let eventDetailsAtomResult;
@@ -33,7 +33,7 @@ export default function EventCard(props) {
         setEventDetails(response);
         // setEventDetails(eventDetailsAtomResult);
     }
-    const handleShow = async (eventName) => {
+    const handleOrganizer = async (eventName) => {
         const response = await backendService.getEventDetails(eventName);
         // ESA-058: Uncomment below code
         setEventOrganizerDetails(response);
@@ -59,17 +59,17 @@ export default function EventCard(props) {
         // });
     }
     return (
-        <div className='event-card'>
+        <div className='leaderboard-event-card'>
             <div>{props.eventName}</div>
             {
                 loggedInUser.userType === USERS.PARTICIPANT &&
-                <button type="button" className='btn btn-outline-light button_event' onClick={() => handleParticipate(props.eventName)}>
-                    PARTICIPATE
+                <button type="button" className='btn btn-outline-light leaderboard_button_event' onClick={() => handleParticipate(props.eventName)}>
+                    SHOW
                 </button>
             }
             {
                 loggedInUser.userType === USERS.ORGANIZER &&
-                <button type="button" className='btn btn-outline-light button_event' onClick={() => handleShow(props.eventName)}>
+                <button type="button" className='btn btn-outline-light leaderboard_button_event' onClick={() => handleOrganizer(props.eventName)}>
                     SHOW
                 </button>
             }

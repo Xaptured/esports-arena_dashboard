@@ -14,6 +14,7 @@ export default function Leaderboard(props) {
     const [showForm, setShowForm] = useState(false);
     const [file, setFile] = useState(null);
     const [isSubmit, setIsSubmit] = useState(false);
+    const [disableUpload, setDisableUpload] = useState(false);
 
     const toggleForm = () => {
         setShowForm(!showForm);
@@ -28,7 +29,11 @@ export default function Leaderboard(props) {
     };
 
     const handleUpload = async () => {
-        await backendService.saveLeaderboardDocument(file, props.eventId)
+        const response = await backendService.saveLeaderboardDocument(file, props.eventId);
+        if (response.message === "Request Processed") {
+            setErrorMsg("File uploaded successfully");
+            setDisableUpload(true);
+        }
     };
     // ESA-058: in useEffect add call to get teams
     const teamOptions = [
@@ -67,9 +72,9 @@ export default function Leaderboard(props) {
                                                 <input type="file" onChange={handleFileChange} />
                                             </div>
                                             <div className="action-bar-leaderboard">
-                                                <button className='btn btn-outline-light button_event_form' onClick={handleUpload}>Upload Document</button>
-
+                                                <button className='btn btn-outline-light button_event_form' onClick={handleUpload} disabled={disableUpload}>Upload Document</button>
                                             </div>
+                                            <div className="error-message-space">{errorMsg}</div>
                                         </>
                                         :
                                         <form onSubmit={handleSubmit}>

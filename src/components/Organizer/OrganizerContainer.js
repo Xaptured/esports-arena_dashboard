@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import './organizercontainer.css'
 import NavigationBar from '../NavBar/NavigationBar'
 import Events from '../Common/Event/Events'
-import News from '../Common/News'
-import Schedule from '../Common/Schedule'
+import Leaderboards from '../Common/Leaderboards/Leaderboards'
+import Schedule from '../Common/Schedules/Schedules'
 import Help from '../Common/Help'
 import { activeOrganizerTabsAtom } from '../../atoms/activeTabsAtom'
 import { loggedInUserAtom, loggedInUserAtomCopy } from '../../atoms/loginDataAtom'
@@ -49,7 +49,7 @@ export default function OrganizerContainer() {
                     :
                     <>
                         {organizerTabs[0] && <Events />}
-                        {organizerTabs[1] && <News />}
+                        {organizerTabs[1] && <Leaderboards />}
                         {organizerTabs[2] && <Schedule />}
                         {organizerTabs[3] && <Help />}
                     </>

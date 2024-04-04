@@ -11,13 +11,13 @@ const user = {
     email: '',
 }
 const userCopy = {
-    userType: 'organizer',
+    userType: 'participant',
     email: 'jk19011999@gmail.com',
 }
 
 const profileStatus = false;
 
-const useCopyValue = true;
+const useCopyValue = false;
 
 export const loggedInUserAtom = atom(user);
 export const loggedInUserAtomCopy = atom(userCopy);

@@ -22,27 +22,27 @@ export default function EventOrganizerDetails() {
 
     const getTeamsWithCount = async () => {
         // ESA-058:change event name
-        const response = await backendService.getEventId('PUBG-EVENT');
+        const response = await backendService.getEventId(eventOrganizerDetails.name);
         // ESA-058:change event id to response
-        setEventId(1);
+        setEventId(response);
         const teamDetailsResponse = await backendService.getTeamsWithCount(response, eventOrganizerDetails.name);
         // ESA-058: Uncomment below code
-        // setTeamDetailsList(teamDetailsResponse);
-        setTeamDetailsList([
-            {
-                teamName: "first-team",
-                remainingPlayers: 2
-            },
-            {
-                teamName: "second-team",
-                remainingPlayers: 0
-            },
-            {
-                teamName: "third-team",
-                remainingPlayers: 1
-            }
-        ]);
-        const isLeaderComplete = await backendService.isLeaderboardComplete(1);
+        setTeamDetailsList(teamDetailsResponse);
+        // setTeamDetailsList([
+        //     {
+        //         teamName: "first-team",
+        //         remainingPlayers: 2
+        //     },
+        //     {
+        //         teamName: "second-team",
+        //         remainingPlayers: 0
+        //     },
+        //     {
+        //         teamName: "third-team",
+        //         remainingPlayers: 1
+        //     }
+        // ]);
+        const isLeaderComplete = await backendService.isLeaderboardComplete(response);
         setIsLeaderboardComplete(isLeaderComplete);
     }
 
@@ -52,12 +52,12 @@ export default function EventOrganizerDetails() {
 
     const generateExcel = async () => {
         // ESA-058:change event id
-        await backendService.generateExcel(1);
+        await backendService.generateExcel(eventId);
     }
 
     useEffect(() => {
         getTeamsWithCount();
-    }, []);
+    }, [eventOrganizerDetails.name]);
     return (
         <>
             {
