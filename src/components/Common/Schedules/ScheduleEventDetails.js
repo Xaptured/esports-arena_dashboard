@@ -21,7 +21,7 @@ export default function ScheduleEventDetails() {
         loggedInUserAtomResult = loggedInUserAtom;
     }
     // ESA-058-END
-    const eventDetails = useAtomValue(eventDetailsAtomResult);
+    const [eventDetails, setEventDetails] = useAtom(eventDetailsAtomResult);
     const [eventOrganizerDetails, setEventOrganizerDetails] = useAtom(eventOrganizerDetailsAtom);
     const loggedInUser = useAtomValue(loggedInUserAtomResult);
     const [eventId, setEventId] = useState(null);
@@ -29,7 +29,12 @@ export default function ScheduleEventDetails() {
 
     const getEventId = async () => {
         // ESA-058: change the team name to get from eventDetails atom
-        const response = await backendService.getEventId('PUBG-EVENT');
+        let response;
+        if (loggedInUser.userType === 'participant') {
+            response = await backendService.getEventId(eventDetails.name);
+        } else {
+            response = await backendService.getEventId(eventOrganizerDetails.name);
+        }
         setEventId(response);
         return response;
     }
@@ -41,6 +46,14 @@ export default function ScheduleEventDetails() {
     //     // ESA-058: uncomment below code
     //     // setLeaderboard(response);
     // }
+
+    const closeEventDetails = () => {
+        setEventDetails(null);
+    }
+
+    const closeEventOrganizerDetails = () => {
+        setEventOrganizerDetails(null);
+    }
 
     useEffect(() => {
         // if (loggedInUser.userType === USERS.PARTICIPANT)
@@ -54,13 +67,19 @@ export default function ScheduleEventDetails() {
             {
                 loggedInUser.userType === USERS.PARTICIPANT && <>
                     <EventDetailSection eventDetails={eventDetails} />
+                    <button type="button" className='btn btn-outline-light button_team' onClick={closeEventDetails}>
+                        Close
+                    </button>
                     {/* can think to show slots left */}
                 </>
             }
             {
                 loggedInUser.userType === USERS.ORGANIZER && <>
                     <EventDetailSection eventDetails={eventOrganizerDetails} />
-                    {/* can think to show teams registered along with slots left if event is active
+                    <button type="button" className='btn btn-outline-light button_team' onClick={closeEventOrganizerDetails}>
+                        Close
+                    </button>
+                    {/* TODO: can think to show teams registered along with slots left if event is active
                     else waiting for approval from admin */}
 
                 </>

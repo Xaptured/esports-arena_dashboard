@@ -28,26 +28,28 @@ export default function Leaderboards() {
     }
     // ESA-058-END
     const loggedInUser = useAtomValue(loggedInUserAtomResult);
-    const eventDetails = useAtomValue(eventDetailsAtom);
-    const eventOrganizerDetails = useAtomValue(eventOrganizerDetailsAtom);
+    const [eventDetails, setEventDetails] = useAtom(eventDetailsAtom);
+    const [eventOrganizerDetails, setEventOrganizerDetails] = useAtom(eventOrganizerDetailsAtom);
     const [futureEvents, setFutureEvents] = useAtom(futureEventsAtomResult);
     const [futureOrgEvents, setFutureOrgEvents] = useAtom(futureOrganizerEventsResult);
 
     const findAllScheduledParticipantEvents = async () => {
         const response = await backendService.findAllScheduledParticipantEvents(loggedInUser.email);
         // ESA-058: should be uncommented
-        // setFutureEvents(response);
+        setFutureEvents(response);
     }
 
     const findAllScheduledeOrganizerEvents = async () => {
         const response = await backendService.findAllScheduledeOrganizerEvents(loggedInUser.email);
         // ESA-058: should be uncommented
-        // setFutureOrgEvents(response);
+        setFutureOrgEvents(response);
     }
     useEffect(() => {
         if (loggedInUser.userType === USERS.PARTICIPANT) {
+            setEventDetails(undefined);
             findAllScheduledParticipantEvents();
         } else {
+            setEventOrganizerDetails(undefined);
             findAllScheduledeOrganizerEvents();
         }
     }, []);

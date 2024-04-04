@@ -17,7 +17,7 @@ const userCopy = {
 
 const profileStatus = false;
 
-const useCopyValue = true;
+const useCopyValue = false;
 
 export const loggedInUserAtom = atom(user);
 export const loggedInUserAtomCopy = atom(userCopy);

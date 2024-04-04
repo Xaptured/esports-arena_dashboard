@@ -30,33 +30,33 @@ export default function EventCard(props) {
     const handleParticipate = async (eventName) => {
         const response = await backendService.getEventDetails(eventName);
         // ESA-058: Uncomment below code
-        // setEventDetails(response);
-        setEventDetails(eventDetailsAtomResult);
+        setEventDetails(response);
+        // setEventDetails(eventDetailsAtomResult);
     }
     const handleShow = async (eventName) => {
         const response = await backendService.getEventDetails(eventName);
         // ESA-058: Uncomment below code
-        // setEventOrganizerDetails(response);
-        setEventOrganizerDetails({
-            name: "PUBG-EVENT",
-            date: "12-12-2012",
-            time: "1:10:00",
-            duration: "1:00",
-            status: 'COMPLETED',
-            playersPerSlot: 4,
-            slotCount: 10,
-            remainingSlots: 8,
-            type: "PAID",
-            prizePool: 30000,
-            rules: [
-                {
-                    description: "rule-1"
-                },
-                {
-                    description: "rule-2"
-                }
-            ]
-        });
+        setEventOrganizerDetails(response);
+        // setEventOrganizerDetails({
+        //     name: "PUBG-EVENT",
+        //     date: "12-12-2012",
+        //     time: "1:10:00",
+        //     duration: "1:00",
+        //     status: 'COMPLETED',
+        //     playersPerSlot: 4,
+        //     slotCount: 10,
+        //     remainingSlots: 8,
+        //     type: "PAID",
+        //     prizePool: 30000,
+        //     rules: [
+        //         {
+        //             description: "rule-1"
+        //         },
+        //         {
+        //             description: "rule-2"
+        //         }
+        //     ]
+        // });
     }
     return (
         <div className='event-card'>

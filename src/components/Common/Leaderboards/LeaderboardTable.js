@@ -21,7 +21,7 @@ export default function LeaderboardTable(props) {
     const fetchTeamsData = async () => {
         const response = await backendService.getTeamsWithPoints(props.eventId);
         // ESA-058: uncomment below code
-        // setTeams(response);
+        setTeams(response);
     }
 
     useEffect(() => {

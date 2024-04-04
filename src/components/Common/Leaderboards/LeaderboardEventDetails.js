@@ -21,7 +21,7 @@ export default function LeaderboardEventDetails() {
         loggedInUserAtomResult = loggedInUserAtom;
     }
     // ESA-058-END
-    const eventDetails = useAtomValue(eventDetailsAtomResult);
+    const [eventDetails, setEventDetails] = useAtom(eventDetailsAtomResult);
     const [eventOrganizerDetails, setEventOrganizerDetails] = useAtom(eventOrganizerDetailsAtom);
     const loggedInUser = useAtomValue(loggedInUserAtomResult);
     const [eventId, setEventId] = useState(null);
@@ -29,9 +29,25 @@ export default function LeaderboardEventDetails() {
 
     const getEventId = async () => {
         // ESA-058: change the team name to get from eventDetails atom
-        const response = await backendService.getEventId('PUBG-EVENT');
+        // const response = await backendService.getEventId(eventDetails.name);
+        // setEventId(response);
+        // return response;
+        let response;
+        if (loggedInUser.userType === 'participant') {
+            response = await backendService.getEventId(eventDetails.name);
+        } else {
+            response = await backendService.getEventId(eventOrganizerDetails.name);
+        }
         setEventId(response);
         return response;
+    }
+
+    const closeEventDetails = () => {
+        setEventDetails(null);
+    }
+
+    const closeEventOrganizerDetails = () => {
+        setEventOrganizerDetails(null);
     }
 
     const fetchLeaderboardData = async () => {
@@ -39,7 +55,7 @@ export default function LeaderboardEventDetails() {
         const id = await getEventId();
         const response = await backendService.getLeaderboard(id, loggedInUser.email);
         // ESA-058: uncomment below code
-        // setLeaderboard(response);
+        setLeaderboard(response);
     }
 
     useEffect(() => {
@@ -62,6 +78,9 @@ export default function LeaderboardEventDetails() {
                     {
                         eventId && <LeaderboardTable eventId={eventId} />
                     }
+                    <button type="button" className='btn btn-outline-light button_team' onClick={closeEventDetails}>
+                        Close
+                    </button>
                 </>
             }
             {
@@ -70,7 +89,9 @@ export default function LeaderboardEventDetails() {
                     {
                         eventId && <LeaderboardTable eventId={eventId} />
                     }
-
+                    <button type="button" className='btn btn-outline-light button_team' onClick={closeEventOrganizerDetails}>
+                        Close
+                    </button>
                 </>
             }
         </div>

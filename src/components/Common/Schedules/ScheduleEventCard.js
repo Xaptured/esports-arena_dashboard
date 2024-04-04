@@ -4,6 +4,7 @@ import { useSetAtom, useAtomValue, useAtom } from 'jotai'
 import { eventDetailsAtom, eventDetailsAtomCopy, eventOrganizerDetailsAtomCopy, eventOrganizerDetailsAtom } from '../../../atoms/eventAtom'
 import { useCopyValueAtom } from '../../../atoms/loginDataAtom';
 import { USERS, loggedInUserAtom, loggedInUserAtomCopy } from '../../../atoms/loginDataAtom';
+import backendService from '../../../services/backendService'
 
 
 export default function ScheduleEventCard(props) {
@@ -27,35 +28,35 @@ export default function ScheduleEventCard(props) {
     const loggedInUser = useAtomValue(loggedInUserAtomResult);
 
     const handleParticipate = async (eventName) => {
-        // const response = await backendService.getEventDetails(eventName);
+        const response = await backendService.getEventDetails(eventName);
         // ESA-058: Uncomment below code
-        // setEventDetails(response);
-        setEventDetails(eventDetailsAtomResult);
+        setEventDetails(response);
+        // setEventDetails(eventDetailsAtomResult);
     }
     const handleOrganizer = async (eventName) => {
-        // const response = await backendService.getEventDetails(eventName);
+        const response = await backendService.getEventDetails(eventName);
         // ESA-058: Uncomment below code
-        // setEventOrganizerDetails(response);
-        setEventOrganizerDetails({
-            name: "PUBG-EVENT",
-            date: "12-12-2012",
-            time: "1:10:00",
-            duration: "1:00",
-            status: 'COMPLETED',
-            playersPerSlot: 4,
-            slotCount: 10,
-            remainingSlots: 8,
-            type: "PAID",
-            prizePool: 30000,
-            rules: [
-                {
-                    description: "rule-1"
-                },
-                {
-                    description: "rule-2"
-                }
-            ]
-        });
+        setEventOrganizerDetails(response);
+        // setEventOrganizerDetails({
+        //     name: "PUBG-EVENT",
+        //     date: "12-12-2012",
+        //     time: "1:10:00",
+        //     duration: "1:00",
+        //     status: 'COMPLETED',
+        //     playersPerSlot: 4,
+        //     slotCount: 10,
+        //     remainingSlots: 8,
+        //     type: "PAID",
+        //     prizePool: 30000,
+        //     rules: [
+        //         {
+        //             description: "rule-1"
+        //         },
+        //         {
+        //             description: "rule-2"
+        //         }
+        //     ]
+        // });
     }
     return (
         <div className='leaderboard-event-card'>

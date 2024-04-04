@@ -38,13 +38,15 @@ export default function Events() {
     const getActiveEventsWrtIntGames = async () => {
         const response = await backendService.getActiveEventsWrtInterestedGamesData(loggedInUser.email);
         // ESA-058: should be uncommented
-        // setActiveEvents(response);
+        setActiveEvents(response);
     }
 
     const getAllUpcomingOrganizerEvents = async () => {
         const response = await backendService.getAllUpcomingOrganizerEvents(loggedInUser.email);
         // ESA-058: should be uncommented
-        // setActiveOrgEvents(response);
+        if (response.length > 0) {
+            setActiveOrgEvents(response);
+        }
     }
 
     const showEventForm = () => {

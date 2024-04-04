@@ -52,8 +52,8 @@ export default function EventDetails() {
         } else {
             if (!isFieldUnique(val)) {
                 // ESA-058 - uncomment below code
-                // const response = await backendService.isProfilePresent(val);
-                const response = true;
+                const response = await backendService.isProfilePresent(val);
+                // const response = true;
                 if (response) {
                     setErrorMsg('');
                     let counter = countPlayers;
@@ -133,29 +133,35 @@ export default function EventDetails() {
 
     const getEventId = async () => {
         // ESA-058: change the team name to get from eventDetails atom
-        const response = await backendService.getEventId('PUBG-EVENT');
+        const response = await backendService.getEventId(eventDetails.name);
         setEventId(response);
+        return response;
     }
 
     const isRegisteredInEvent = async () => {
-        await getEventId();
-        if (eventId) {
-            const response = await backendService.isRegistered(eventId, eventDetails.name, loggedInUser.email);
-            if (response) {
-                const message = eventDetails.type === 'FREE' ? 'Team successfully registered' : 'Team successfully registered and it is in pending state. Once organizer approves it, you will receive an email of confirmation.';
-                setMessage(message);
-            }
-            // setRegistered(response);
-            // ESA-058: make it set to the response
-            // const message = eventDetails.type === 'FREE' ? 'Team successfully registered' : 'Team successfully registered and it is in pending state. Once organizer approves it, you will receive an email of confirmation.';
-            // setMessage(message);
-            else {
-                setRegistered(false);
-                const teamDetailsResponse = await backendService.getTeamsWithCount(eventId, eventDetails.name);
-                setTeamDetailsList(teamDetailsResponse);
-            }
+        const id = await getEventId();
+        const response = await backendService.isRegistered(id, eventDetails.name, loggedInUser.email);
+        if (response) {
+            setRegistered(response);
+            if (eventDetails.type === 'FREE') {
+                setMessage('Team successfully registered');
+            } else {
+                // call backend to check team is approved or not
 
+            }
+            const message = eventDetails.type === 'FREE' ? 'Team successfully registered' : 'Team successfully registered and it is in pending state. Once organizer approves it, you will receive an email of confirmation.';
+            setMessage(message);
         }
+        // setRegistered(response);
+        // ESA-058: make it set to the response
+        // const message = eventDetails.type === 'FREE' ? 'Team successfully registered' : 'Team successfully registered and it is in pending state. Once organizer approves it, you will receive an email of confirmation.';
+        // setMessage(message);
+        else {
+            setRegistered(response);
+            const teamDetailsResponse = await backendService.getTeamsWithCount(id, eventDetails.name);
+            setTeamDetailsList(teamDetailsResponse);
+        }
+
     }
 
     const handleShowParticipant = async () => {
@@ -173,7 +179,7 @@ export default function EventDetails() {
 
     useEffect(() => {
         isRegisteredInEvent();
-    }, [eventId]);
+    }, []);
     return (
         <>
             {
