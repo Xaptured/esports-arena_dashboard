@@ -32,8 +32,8 @@ export default function ParticipantContainer() {
         const response = await backendService.isProfileComplete(loggedInUser.email);
         // ESA-058: Uncomment below code
         // FIX
-        // setProfileComplete(response.profileComplete);
-        setProfileComplete(true);
+        setProfileComplete(response.profileComplete);
+        // setProfileComplete(true);
     }
 
     useEffect(() => {

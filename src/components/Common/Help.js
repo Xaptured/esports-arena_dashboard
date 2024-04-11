@@ -1,6 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './help.css';
 import backendService from '../../services/backendService';
+import YoutubeCard from './YoutubeCard';
+import { useAtom, useAtomValue } from 'jotai';
+import { useCopyValueAtom } from '../../atoms/loginDataAtom';
+import { loggedInUserAtom, loggedInUserAtomCopy } from '../../atoms/loginDataAtom';
+
 
 export default function Help() {
     const initialComments = {
@@ -16,12 +21,23 @@ export default function Help() {
         verified: false,
         message: '',
     };
+    // ESA-058-START
+    const useCopyAtom = useAtomValue(useCopyValueAtom);
+    let loggedInUserAtomResult;
+    if (useCopyAtom) {
+        loggedInUserAtomResult = loggedInUserAtomCopy;
+    } else {
+        loggedInUserAtomResult = loggedInUserAtom;
+    }
+    // ESA-058-END
+    const loggedInUser = useAtomValue(loggedInUserAtomResult);
 
     const [comments, setComments] = useState(initialComments);
     const [isLoadingComments, setLoadingComments] = useState(false);
     const [disabledComments, setDisabledComments] = useState(false);
     const [commentsMessage, setCommentsMessage] = useState('Reach out to us for any concerns');
     const [credentials, setCredentials] = useState(initialCredentials);
+    const [videos, setVideos] = useState([]);
 
     const handleSubmitComments = async (event) => {
         event.preventDefault();
@@ -83,11 +99,32 @@ export default function Help() {
         setComments(newCommentsObject);
     };
 
+    const getVideoDetails = async (email) => {
+        const response = await backendService.getVideoDetails(email);
+        const data = response.youTubeResponse;
+        setVideos(data.items);
+    }
+
+    useEffect(() => {
+        getVideoDetails(loggedInUser.email);
+    }, []);
+
 
     return (
         <div className='container help-container'>
             <div className='help-content'>
-                <div className='help-content-left'></div>
+                <div className='help-content-left'>
+                    <div className='scrollable-container'>
+                        {
+                            videos && (
+                                videos.map((video, index) => (
+                                    <YoutubeCard key={index} video={video} />
+                                ))
+                            )
+                        }
+                    </div>
+
+                </div>
                 <div className='help-content-middle'>
                     <div className="wrapper">
                         <div className="form-box">

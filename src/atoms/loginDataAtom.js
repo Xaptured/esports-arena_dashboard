@@ -7,8 +7,8 @@ export const USERS = {
 }
 
 const user = {
-    userType: 'participant',
-    email: 'jk19011999@gmail.com',
+    userType: '',
+    email: '',
 }
 const userCopy = {
     userType: 'participant',

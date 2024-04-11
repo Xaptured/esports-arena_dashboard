@@ -453,6 +453,20 @@ const backendService = {
             console.log("Error while getting leaderboard data", error);
         }
     },
+
+    async getVideoDetails(email) {
+        try {
+            const url = 'http://localhost:8086/youtube/get-news-videos/' + email;
+            const result = await fetch(url);
+            const jsonResult = await result.json();
+            if (!result.ok) {
+                throw new Error(jsonResult.message || 'Internal Server Error');
+            }
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while getting video details", error);
+        }
+    },
 }
 
 export default backendService;
