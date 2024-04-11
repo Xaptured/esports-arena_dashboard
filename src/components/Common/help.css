@@ -1,0 +1,159 @@
+.help-container {
+  width: 100%;
+  min-height: 80vh;
+  height: auto;
+}
+
+.help-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.help-content-left {
+  width: 400px;
+  min-height: 80vh;
+}
+
+.help-content-right {
+  width: 400px;
+  min-height: 80vh;
+}
+
+.help-content-middle {
+  width: 400px;
+  min-height: 80vh;
+}
+
+.wrapper {
+  min-width: 35%;
+  height: auto;
+}
+
+.form-box {
+  background: transparent;
+  border: 3px solid white;
+  backdrop-filter: blur(12px);
+  color: #fff;
+  border-radius: 12px;
+  padding: 8% 7%;
+}
+
+.form-box h1 {
+  font-family: "FontTwo", cursive;
+  font-size: 40px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.form-box .input-box {
+  width: 100%;
+  height: 50px;
+  margin: 8% 0;
+}
+
+.input-box input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  outline: none;
+  border: 2px solid white;
+  border-radius: 40px;
+  font-size: 16px;
+  color: #fff;
+  padding: 20px 45px 20px 20px;
+}
+
+.input-box input::placeholder {
+  color: rgb(111, 110, 110);
+  text-align: left;
+}
+
+.input-box i {
+  position: absolute;
+  right: 20px;
+  top: 30%;
+  transform: translate(-50%);
+  font-size: 20px;
+}
+
+.input-box textarea {
+  width: 100%;
+  height: auto;
+  background: transparent;
+  outline: none;
+  border: 2px solid white;
+  border-radius: 20px;
+  font-size: 16px;
+  color: #fff;
+  padding: 10% 20% 6% 5%;
+  resize: none;
+  overflow: hidden;
+}
+
+.input-box textarea::placeholder {
+  color: rgb(110, 110, 110);
+  text-align: left;
+}
+
+.button_submit {
+  width: 100%;
+  margin-top: 21%;
+  margin-bottom: 2%;
+  font-family: "FontOne", sans-serif;
+  border-width: 5px;
+  border-radius: 0%;
+  /* TODO: should use this space to show messages to the user */
+  margin-bottom: 7%;
+}
+
+.message {
+  display: flex;
+  justify-content: center;
+  color: gray;
+  font-size: 14px;
+}
+
+.youtube-card {
+  width: 100%;
+  padding: 2%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 5%;
+}
+
+.thumbnail {
+  width: 100%;
+  height: auto;
+  border: 3px solid #ccc;
+  margin-bottom: 3%;
+}
+
+.video-title {
+  font-family: "FontOne", sans-serif;
+  margin-bottom: 0%;
+}
+
+.scrollable-container {
+  max-height: 75vh;
+  overflow-y: scroll;
+  margin-top: 2%;
+  padding-left: 5%;
+  padding-right: 5%;
+  scroll-behavior: smooth;
+}
+
+.scrollable-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb {
+  background-color: #d9d2d2;
+  border-radius: 8px;
+}
+
+.scrollable-container::-webkit-scrollbar-track {
+  background-color: #7f7878;
+  border-radius: 8px;
+}
