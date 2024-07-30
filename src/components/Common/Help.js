@@ -5,7 +5,8 @@ import YoutubeCard from './YoutubeCard';
 import { useAtom, useAtomValue } from 'jotai';
 import { useCopyValueAtom } from '../../atoms/loginDataAtom';
 import { loggedInUserAtom, loggedInUserAtomCopy } from '../../atoms/loginDataAtom';
-
+import SyncLoader from 'react-spinners/SyncLoader';
+import HashLoader from 'react-spinners/HashLoader';
 
 export default function Help() {
     const initialComments = {
@@ -38,6 +39,17 @@ export default function Help() {
     const [commentsMessage, setCommentsMessage] = useState('Reach out to us for any concerns');
     const [credentials, setCredentials] = useState(initialCredentials);
     const [videos, setVideos] = useState([]);
+    const override = {
+        marginTop: "36%",
+        paddingLeft: "40%",
+        marginBottom: "8%",
+    };
+
+    const youtubeOverride = {
+        marginTop: "50%",
+        paddingLeft: "70%",
+        marginBottom: "8%",
+    }
 
     const handleSubmitComments = async (event) => {
         event.preventDefault();
@@ -114,16 +126,29 @@ export default function Help() {
         <div className='container help-container'>
             <div className='help-content'>
                 <div className='help-content-left'>
-                    <div className='scrollable-container'>
-                        {
-                            videos && (
-                                videos.map((video, index) => (
-                                    <YoutubeCard key={index} video={video} />
-                                ))
-                            )
-                        }
-                    </div>
-
+                    {
+                        videos.length === 0 && (
+                            <div className=''>
+                                <HashLoader
+                                    color={"#ffffff"}
+                                    loading={true}
+                                    cssOverride={youtubeOverride}
+                                    size={150}
+                                />
+                            </div>
+                        )
+                    }
+                    {
+                        videos.length > 0 && (
+                            <div className='scrollable-container'>
+                                {
+                                    videos.map((video, index) => (
+                                        <YoutubeCard key={index} video={video} />
+                                    ))
+                                }
+                            </div>
+                        )
+                    }
                 </div>
                 <div className='help-content-middle'>
                     <div className="wrapper">
@@ -137,7 +162,7 @@ export default function Help() {
                     <div className="wrapper">
                         <div className="form-box">
                             <form onSubmit={handleSubmitComments}>
-                                <h1>Contact us</h1>
+                                <h1>Contact me</h1>
                                 <div className='mb-3 input-box'>
                                     <input
                                         type="email"
@@ -158,7 +183,14 @@ export default function Help() {
                                 {
                                     isLoadingComments ?
                                         <div>
-                                            Loading...
+                                            <div className=''>
+                                                <SyncLoader
+                                                    color={"#ffffff"}
+                                                    loading={isLoadingComments}
+                                                    cssOverride={override}
+                                                    size={15}
+                                                />
+                                            </div>
                                         </div>
                                         :
                                         <div>

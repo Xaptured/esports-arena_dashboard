@@ -57,18 +57,33 @@ export default function Leaderboards() {
         <div className='container leaderboard-tab-container'>
             <div className='leaaderboard-content'>
                 <div className='leaderboard-content-left'>
-                    <div className="scrollable-container">
-                        {
-                            loggedInUser.userType === USERS.PARTICIPANT && futureEvents && futureEvents.map((futureEvent) => (
-                                <ScheduleEventCard eventName={futureEvent.name} key={futureEvent.name} />
-                            ))
-                        }
-                        {
-                            loggedInUser.userType === USERS.ORGANIZER && futureOrgEvents && futureOrgEvents.map((futureOrgEvent) => (
-                                <ScheduleEventCard eventName={futureOrgEvent.name} key={futureOrgEvent.name} />
-                            ))
-                        }
-                    </div>
+                    {
+                        loggedInUser.userType === USERS.PARTICIPANT && futureEvents && futureEvents.length === 0 && (
+                            <p className='event-content-left-no-content'>Currently there are no events to show up here.</p>
+                        )
+                    }
+                    {
+                        loggedInUser.userType === USERS.ORGANIZER && futureOrgEvents && futureOrgEvents.length === 0 && (
+                            <p className='event-content-left-no-content'>Currently there are no events to show up here.</p>
+                        )
+                    }
+                    {
+                        (loggedInUser.userType === USERS.PARTICIPANT && futureEvents.length > 0 || loggedInUser.userType === USERS.ORGANIZER && futureOrgEvents.length > 0) && (
+                            <div className="scrollable-container">
+                                {
+                                    loggedInUser.userType === USERS.PARTICIPANT && futureEvents && futureEvents.map((futureEvent) => (
+                                        <ScheduleEventCard eventName={futureEvent.name} key={futureEvent.name} />
+                                    ))
+                                }
+                                {
+                                    loggedInUser.userType === USERS.ORGANIZER && futureOrgEvents && futureOrgEvents.map((futureOrgEvent) => (
+                                        <ScheduleEventCard eventName={futureOrgEvent.name} key={futureOrgEvent.name} />
+                                    ))
+                                }
+                            </div>
+                        )
+                    }
+
                 </div>
                 <div className='leaderboard-content-right'>
                     {

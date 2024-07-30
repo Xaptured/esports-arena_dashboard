@@ -11,7 +11,7 @@ import { useCopyValueAtom } from '../../../atoms/loginDataAtom';
 import { useAtomValue, useAtom } from 'jotai';
 import backendService from '../../../services/backendService';
 import { activeOrganizerEventsCopy, activeOrganizerEvents } from '../../../atoms/eventAtom';
-
+import SyncLoader from 'react-spinners/SyncLoader';
 
 export default function EventForm(props) {
 
@@ -42,6 +42,10 @@ export default function EventForm(props) {
     const [prizepool, setPrizepool] = useState(null);
     const [inputFields, setInputFields] = useState(['']);
     const [errorMsg, setErrorMsg] = useState('');
+    const [isLoading, setLoading] = useState(false);
+    const override = {
+        paddingLeft: "45%",
+    };
 
     // ESA-058: in useEffect add call to get games
     const gameOptions = [
@@ -84,6 +88,7 @@ export default function EventForm(props) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setLoading(true);
         const payload = {
             name: eventName,
             email: loggedInUser.email,
@@ -101,6 +106,7 @@ export default function EventForm(props) {
         };
         const response = await backendService.saveEvent(payload);
         if (response.message === 'Request Processed') {
+            setLoading(false);
             const activeEvents = [...activeOrgEvents];
             const newEvent = {
                 name: eventName
@@ -108,6 +114,19 @@ export default function EventForm(props) {
             activeEvents.unshift(newEvent);
             setActiveOrgEvents(activeEvents);
             setErrorMsg('Event successfully saved and pending from admin.');
+            setEventName('');
+            setSelectedGame(null);
+            setDate(null);
+            setTime(null);
+            setDuration(null);
+            setPlayersPerSlot('');
+            setSlotCount('');
+            setSelectedEventType(null);
+            setPrizepool('');
+            setInputFields(['']);
+            setTimeout(() => {
+                showForm();
+            }, 5000);
         } else {
             setErrorMsg('Something went wrong. Please try again later.');
         }
@@ -238,14 +257,28 @@ export default function EventForm(props) {
                                 <label onClick={handleCancelField}>-Cancel</label>
                             }
                         </div>
-                        <div className="action-bar">
-                            <button type="button" className='btn btn-outline-light button_event_form' onClick={showForm}>
-                                Close
-                            </button>
-                            <button type="submit" className='btn btn-outline-light button_event_form'>
-                                Submit
-                            </button>
-                        </div>
+                        {
+                            isLoading ?
+                                <div>
+                                    <div className=''>
+                                        <SyncLoader
+                                            color={"#ffffff"}
+                                            loading={isLoading}
+                                            cssOverride={override}
+                                            size={10}
+                                        />
+                                    </div>
+                                </div>
+                                :
+                                <div className="action-bar">
+                                    <button type="button" className='btn btn-outline-light button_event_form' onClick={showForm}>
+                                        Close
+                                    </button>
+                                    <button type="submit" className='btn btn-outline-light button_event_form'>
+                                        Submit
+                                    </button>
+                                </div>
+                        }
 
                         {/* Use this space to show error messages */}
                         <div className="error-message-space">{errorMsg}</div>

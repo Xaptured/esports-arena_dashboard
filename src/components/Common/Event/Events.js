@@ -64,19 +64,34 @@ export default function Events() {
         <div className='container event-container'>
             <div className='event-content'>
                 <div className='event-content-left'>
-                    <div className="scrollable-container">
-                        {
-                            loggedInUser.userType === USERS.PARTICIPANT && activeEvents && activeEvents.map((activeEvent) => (
-                                <EventCard eventName={activeEvent.name} key={activeEvent.name} />
-                            ))
-                        }
+                    {
+                        loggedInUser.userType === USERS.PARTICIPANT && activeEvents.length === 0 && (
+                            <p className='event-content-left-no-content'>There are no events which matches your interest. Please wait for some time to get started.</p>
+                        )
+                    }
+                    {
+                        loggedInUser.userType === USERS.ORGANIZER && activeOrgEvents.length === 0 && (
+                            <p className='event-content-left-no-content'>You haven't created any event till now. Please create one to stack up here.</p>
+                        )
+                    }
+                    {
+                        (loggedInUser.userType === USERS.PARTICIPANT && activeEvents.length > 0 || loggedInUser.userType === USERS.ORGANIZER && activeOrgEvents.length > 0) && (
+                            <div className="scrollable-container">
+                                {
+                                    loggedInUser.userType === USERS.PARTICIPANT && activeEvents && activeEvents.map((activeEvent) => (
+                                        <EventCard eventName={activeEvent.name} key={activeEvent.name} />
+                                    ))
+                                }
 
-                        {
-                            loggedInUser.userType === USERS.ORGANIZER && activeOrgEvents && activeOrgEvents.map((activeOrgEvent) => (
-                                <EventCard eventName={activeOrgEvent.name} key={activeOrgEvent.name} />
-                            ))
-                        }
-                    </div>
+                                {
+                                    loggedInUser.userType === USERS.ORGANIZER && activeOrgEvents && activeOrgEvents.map((activeOrgEvent) => (
+                                        <EventCard eventName={activeOrgEvent.name} key={activeOrgEvent.name} />
+                                    ))
+                                }
+                            </div>
+                        )
+                    }
+
                 </div>
                 <div className='event-content-right'>
                     {

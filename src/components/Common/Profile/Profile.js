@@ -7,7 +7,7 @@ import { loggedInUserAtom, loggedInUserAtomCopy } from '../../../atoms/loginData
 import backendService from '../../../services/backendService';
 import { profileStatusAtom } from '../../../atoms/loginDataAtom'
 import { useCopyValueAtom } from '../../../atoms/loginDataAtom';
-// import { Oval } from 'react-loader-spinner'
+import SyncLoader from 'react-spinners/SyncLoader';
 
 export default function Profile() {
 
@@ -35,6 +35,12 @@ export default function Profile() {
     const [profile, setProfile] = useState(initialProfileDetails);
     const [checkedGames, setCheckedGames] = useState([]);
     const [activeGames, setActiveGames] = useState(null);
+    const [isLoading, setLoading] = useState(false);
+    const [message, setMessage] = useState('');
+    const override = {
+        marginTop: "4%",
+        paddingLeft: "42%",
+    };
 
     const handleInputChangeName = (e) => {
         const newProfileObject = { ...profile };
@@ -64,7 +70,7 @@ export default function Profile() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        // 1. build interested games object and assign it to profile object
+        setLoading(true);
         const interestedGamesArray = checkedGames.map((game) => {
             return (
                 {
@@ -76,13 +82,12 @@ export default function Profile() {
         const prevProfile = profile;
         prevProfile.interestedGames = interestedGamesArray;
         setProfile(prevProfile);
-        // 2. create backend service to call saveProfile API
         const result = await backendService.saveProfile(profile);
+        setLoading(false);
         if (result.message === 'Request Processed') {
-            console.log("result: ", result);
             setProfileStatusAtom(true);
         } else {
-            console.log("Error occurred");
+            setMessage('Error occurred! Please try again later');
         }
     }
 
@@ -92,7 +97,6 @@ export default function Profile() {
     }
 
     useEffect(() => {
-        // fetch active games
         getActiveGames();
     }, []);
 
@@ -105,16 +109,6 @@ export default function Profile() {
                     <br />
                     <p style={{ fontSize: '25px', color: 'grey', marginTop: '5%' }}>Please complete your profile to start your exciting journey.</p>
                     <LiaLongArrowAltRightSolid size={200} />
-                    {/* <Oval
-                        visible={true}
-                        height="40"
-                        width="40"
-                        color="#FFFFFF"
-                        secondaryColor='#B2B2B2'
-                        ariaLabel="oval-loading"
-                        wrapperStyle={{}}
-                        wrapperClass=""
-                    /> */}
                 </div>
                 <div className='profile-form'>
                     <div className="form-box-profile">
@@ -167,10 +161,25 @@ export default function Profile() {
                                     })
                                 }
                             </div>
+                            {
+                                isLoading ?
+                                    <div className=''>
+                                        <SyncLoader
+                                            color={"#ffffff"}
+                                            loading={isLoading}
+                                            cssOverride={override}
+                                            size={15}
+                                        />
+                                    </div>
+                                    :
+                                    <button type="submit" className='btn btn-outline-light button_submit_profile'>
+                                        Submit
+                                    </button>
+                            }
 
-                            <button type="submit" className='btn btn-outline-light button_submit_profile'>
+                            {/* <button type="submit" className='btn btn-outline-light button_submit_profile'>
                                 Submit
-                            </button>
+                            </button> */}
                             {/* {
                                 isLoadingComments ?
                                     <div>

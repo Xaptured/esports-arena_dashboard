@@ -8,6 +8,7 @@ import backendService from '../../../services/backendService';
 import { loggedInUserAtom, loggedInUserAtomCopy } from '../../../atoms/loginDataAtom';
 import JoinTeamCard from './JoinTeamCard';
 import EventDetailSection from './EventDetailSection';
+import SyncLoader from 'react-spinners/SyncLoader';
 
 export default function EventDetails() {
 
@@ -32,6 +33,7 @@ export default function EventDetails() {
     const [teamName, setTeamName] = useState(null);
     const [eventId, setEventId] = useState(null);
     const [disableSubmit, setDisableSubmit] = useState(false);
+    const [isLoading, setLoading] = useState(false);
     const [isRegistered, setRegistered] = useState(false);
     const [message, setMessage] = useState(null);
     const loggedInUser = useAtomValue(loggedInUserAtomResult);
@@ -39,6 +41,9 @@ export default function EventDetails() {
     const [teamDetails, setTeamDetails] = useState(null);
     const [countLeft, setCountLeft] = useState(null);
     const [teamDetailsList, setTeamDetailsList] = useState(null);
+    const override = {
+        paddingLeft: "45%",
+    };
 
     const isFieldUnique = (value) => {
         const subarray = inputFields.slice(0, inputFields.length - 1);
@@ -92,6 +97,7 @@ export default function EventDetails() {
             if (!isFieldUnique(val)) {
                 setErrorMsg('');
                 setDisableSubmit(true);
+                setLoading(true);
                 const emailArr = inputFields.map((inputEmail) => ({ email: inputEmail, playerNumber: null }));
                 const teamStatus = eventDetails.type === 'FREE' ? 'FREE' : 'PENDING';
                 const payload = {
@@ -103,6 +109,7 @@ export default function EventDetails() {
                 };
                 const result = await backendService.saveTeam(payload);
                 if (result.message === 'Request Processed') {
+                    setLoading(false);
                     const message = eventDetails.type === 'FREE' ? 'Team successfully registered' : 'Team successfully registered and it is in pending state. Once organizer approves it, you will receive an email of confirmation.';
                     setMessage(message);
                     setRegistered(true);
@@ -239,11 +246,26 @@ export default function EventDetails() {
                                                                     ''
                                                             }
                                                         </div>
-                                                        <div className="action-bar">
-                                                            <button type="submit" className='btn btn-outline-light button_submit_create_team' disabled={disableSubmit}>
-                                                                Submit
-                                                            </button>
-                                                        </div>
+                                                        {
+                                                            isLoading ?
+                                                                <div>
+                                                                    <div className=''>
+                                                                        <SyncLoader
+                                                                            color={"#ffffff"}
+                                                                            loading={isLoading}
+                                                                            cssOverride={override}
+                                                                            size={10}
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                                :
+                                                                <div className="action-bar">
+                                                                    <button type="submit" className='btn btn-outline-light button_submit_create_team' disabled={disableSubmit}>
+                                                                        Submit
+                                                                    </button>
+                                                                </div>
+                                                        }
+
                                                         {/* Use this space to show error messages */}
                                                         <div className="error-message-space">{errorMsg}</div>
                                                     </form>
@@ -291,13 +313,13 @@ export default function EventDetails() {
                                                     }
                                                 </div>
                                                 {
-                                                    countLeft && countLeft > 1 && <div className='error-message-space'>{countLeft} slots left</div>
+                                                    countLeft > 1 && <div className='error-message-space'>{countLeft} slots left</div>
                                                 }
                                                 {
-                                                    countLeft && countLeft === 1 && <div className='error-message-space'>{countLeft} slot left</div>
+                                                    countLeft === 1 && <div className='error-message-space'>{countLeft} slot left</div>
                                                 }
                                                 {
-                                                    countLeft && countLeft < 1 && <div className='error-message-space'>No slots left</div>
+                                                    countLeft < 1 && <div className='error-message-space'>No slots left</div>
                                                 }
                                             </div>
                                         </div>
