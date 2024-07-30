@@ -40,7 +40,7 @@ export default function ConnectUs() {
     const [disabled, setDisabled] = useState(false);
     const [disabledComments, setDisabledComments] = useState(false);
     const [registerMessage, setRegisterMessage] = useState('Join our community for the exciting journey');
-    const [loginMessage, setLoginMessage] = useState('Login for the exciting jopurney');
+    const [loginMessage, setLoginMessage] = useState('Login for the exciting journey');
     const [commentsMessage, setCommentsMessage] = useState('Reach out to us for any concerns');
 
     // used to do transitions from login to registration page
@@ -334,7 +334,7 @@ export default function ConnectUs() {
                 <div className="wrapper">
                     <div className="form-box">
                         <form onSubmit={handleSubmitComments}>
-                            <h1>Contact us</h1>
+                            <h1>Contact me</h1>
                             <div className='mb-3 input-box'>
                                 <input
                                     type="email"
