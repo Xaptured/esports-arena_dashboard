@@ -15,6 +15,14 @@
   min-height: 80vh;
 }
 
+.event-content-left-no-content {
+  font-family: "FontOne", sans-serif;
+  font-size: 40px;
+  text-align: left;
+  color: gray;
+  margin-top: 30%;
+}
+
 .event-content-right {
   width: 470px;
   min-height: 80vh;

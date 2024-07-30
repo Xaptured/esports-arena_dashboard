@@ -57,18 +57,32 @@ export default function Leaderboards() {
         <div className='container leaderboard-tab-container'>
             <div className='leaaderboard-content'>
                 <div className='leaderboard-content-left'>
-                    <div className="scrollable-container">
-                        {
-                            loggedInUser.userType === USERS.PARTICIPANT && inctiveEvents && inctiveEvents.map((inactiveEvent) => (
-                                <LeaderboardEventCard eventName={inactiveEvent.name} key={inactiveEvent.name} />
-                            ))
-                        }
-                        {
-                            loggedInUser.userType === USERS.ORGANIZER && inactiveOrgEvents && inactiveOrgEvents.map((inactiveOrgEvent) => (
-                                <LeaderboardEventCard eventName={inactiveOrgEvent.name} key={inactiveOrgEvent.name} />
-                            ))
-                        }
-                    </div>
+                    {
+                        loggedInUser.userType === USERS.PARTICIPANT && inctiveEvents && inctiveEvents.length === 0 && (
+                            <p className='event-content-left-no-content'>Currently there are no events to show up here.</p>
+                        )
+                    }
+                    {
+                        loggedInUser.userType === USERS.ORGANIZER && inactiveOrgEvents && inactiveOrgEvents.length === 0 && (
+                            <p className='event-content-left-no-content'>Currently there are no events to show up here.</p>
+                        )
+                    }
+                    {
+                        (loggedInUser.userType === USERS.PARTICIPANT && inctiveEvents.length > 0 || loggedInUser.userType === USERS.ORGANIZER && inactiveOrgEvents.length > 0) && (
+                            <div className="scrollable-container">
+                                {
+                                    loggedInUser.userType === USERS.PARTICIPANT && inctiveEvents && inctiveEvents.map((inactiveEvent) => (
+                                        <LeaderboardEventCard eventName={inactiveEvent.name} key={inactiveEvent.name} />
+                                    ))
+                                }
+                                {
+                                    loggedInUser.userType === USERS.ORGANIZER && inactiveOrgEvents && inactiveOrgEvents.map((inactiveOrgEvent) => (
+                                        <LeaderboardEventCard eventName={inactiveOrgEvent.name} key={inactiveOrgEvent.name} />
+                                    ))
+                                }
+                            </div>
+                        )
+                    }
                 </div>
                 <div className='leaderboard-content-right'>
                     {

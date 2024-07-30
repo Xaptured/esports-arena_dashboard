@@ -4,6 +4,7 @@ import './connectus.css'
 import React, { useState } from 'react'
 import { USERS, loggedInUserAtom, loggedInUserAtomCopy } from '../../atoms/loginDataAtom';
 import { useCopyValueAtom } from '../../atoms/loginDataAtom';
+import SyncLoader from 'react-spinners/SyncLoader';
 
 export default function ConnectUs() {
     // ESA-058-START
@@ -42,6 +43,17 @@ export default function ConnectUs() {
     const [registerMessage, setRegisterMessage] = useState('Join our community for the exciting journey');
     const [loginMessage, setLoginMessage] = useState('Login for the exciting journey');
     const [commentsMessage, setCommentsMessage] = useState('Reach out to us for any concerns');
+    const override = {
+        marginTop: "36%",
+        paddingLeft: "40%",
+        marginBottom: "6%",
+    };
+
+    const joiningOverride = {
+        marginTop: "8%",
+        paddingLeft: "40%",
+        marginBottom: "4%",
+    };
 
     // used to do transitions from login to registration page
     const switchToRegistration = () => {
@@ -130,7 +142,11 @@ export default function ConnectUs() {
 
     const handleLogin = async (event) => {
         event.preventDefault();
+        setLoading(true);
+        setDisabled(true);
         const result = await backendService.validateCredentials(credentials);
+        setLoading(false);
+        setDisabled(false);
         if (result.message === 'Please verify your account') {
             setLoginMessage('Please verify your account');
         } else if (result.message === 'Invalid access') {
@@ -305,7 +321,16 @@ export default function ConnectUs() {
                             </div>
                             {
                                 isLoading ?
-                                    <div>Loading...</div>
+                                    <div>
+                                        <div className=''>
+                                            <SyncLoader
+                                                color={"#ffffff"}
+                                                loading={isLoading}
+                                                cssOverride={joiningOverride}
+                                                size={15}
+                                            />
+                                        </div>
+                                    </div>
                                     :
                                     <button type="submit" className='btn btn-outline-light button_login' disabled={disabled}>
                                         <span className='register-button'>Register</span>
@@ -355,7 +380,14 @@ export default function ConnectUs() {
                             {
                                 isLoadingComments ?
                                     <div>
-                                        Loading...
+                                        <div className=''>
+                                            <SyncLoader
+                                                color={"#ffffff"}
+                                                loading={isLoadingComments}
+                                                cssOverride={override}
+                                                size={15}
+                                            />
+                                        </div>
                                     </div>
                                     :
                                     <div>
