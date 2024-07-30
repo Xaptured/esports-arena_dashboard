@@ -80,7 +80,10 @@ export default function EventOrganizerDetails() {
                                 </div>
                                 <h1>Teams</h1>
                                 {
-                                    teamDetailsList && teamDetailsList.map((teamDetails) => (
+                                    teamDetailsList && teamDetailsList.length === 0 && <p className="confirm-message-space">No teams registered till now.</p>
+                                }
+                                {
+                                    teamDetailsList && teamDetailsList.length > 0 && teamDetailsList.map((teamDetails) => (
                                         <TeamCard teamName={teamDetails.teamName} count={teamDetails.remainingPlayers} type={eventOrganizerDetails.type} />
                                     ))
                                 }
