@@ -25,7 +25,7 @@ export default function Footer() {
                 </div>
                 <div className='copyright_container'>
                     <FaCopyright className='copyright_icon' />
-                    <span className='copyright_content'>Copyright 2023. All rigts reserved by TheJackFolio. Created by Jack with Love.</span>
+                    <span className='copyright_content'>Copyright 2024. All rights reserved by xaptured. Created by Jack with Love.</span>
                 </div>
             </div>
         </div>
