@@ -114,6 +114,7 @@ export default function EventDetails() {
                     setMessage(message);
                     setRegistered(true);
                 } else {
+                    setLoading(false);
                     setErrorMsg('Error occurred. Please try again later.');
                     setDisableSubmit(false);
                 }
@@ -153,11 +154,16 @@ export default function EventDetails() {
             if (eventDetails.type === 'FREE') {
                 setMessage('Team successfully registered');
             } else {
-                // call backend to check team is approved or not
+                const response = await backendService.getTeamWithEventIDAndEmail(id, eventDetails.name, loggedInUser.email);
+                if (response.teamStatus === 'PAID') {
+                    setMessage('Team successfully registered');
+                } else {
+                    const message = 'Team successfully registered and it is pending for orgznier\'s approval';
+                    setMessage(message);
+                }
 
             }
-            const message = eventDetails.type === 'FREE' ? 'Team successfully registered' : 'Team successfully registered and it is in pending state. Once organizer approves it, you will receive an email of confirmation.';
-            setMessage(message);
+
         }
         // setRegistered(response);
         // ESA-058: make it set to the response
