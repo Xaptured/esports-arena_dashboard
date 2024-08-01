@@ -110,7 +110,7 @@ export default function EventDetails() {
                 const result = await backendService.saveTeam(payload);
                 if (result.message === 'Request Processed') {
                     setLoading(false);
-                    const message = eventDetails.type === 'FREE' ? 'Team successfully registered' : 'Team successfully registered and it is in pending state. Once organizer approves it, you will receive an email of confirmation.';
+                    const message = eventDetails.type === 'FREE' ? 'Team successfully registered' : 'Team successfully registered and it is pending for orgznier\'s approval.';
                     setMessage(message);
                     setRegistered(true);
                 } else {
@@ -158,7 +158,7 @@ export default function EventDetails() {
                 if (response.teamStatus === 'PAID') {
                     setMessage('Team successfully registered');
                 } else {
-                    const message = 'Team successfully registered and it is pending for orgznier\'s approval';
+                    const message = 'Team successfully registered and it is pending for orgznier\'s approval.';
                     setMessage(message);
                 }
 
