@@ -480,6 +480,20 @@ const backendService = {
             console.log("Error while getting video details", error);
         }
     },
+
+    async getInterestedGamesForUser(email) {
+        try {
+            const url = 'http://localhost:8086/games/get-interested-games/' + email;
+            const result = await fetch(url);
+            const jsonResult = await result.json();
+            if (!result.ok) {
+                throw new Error(jsonResult.message || 'Internal Server Error');
+            }
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while getting interested games", error);
+        }
+    },
 }
 
 export default backendService;

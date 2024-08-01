@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dropdown } from 'primereact/dropdown';
 import { Calendar } from 'primereact/calendar';
 import { RxCross2 } from "react-icons/rx";
@@ -46,14 +46,25 @@ export default function EventForm(props) {
     const override = {
         paddingLeft: "45%",
     };
+    const [gameOptions, setGameOptions] = useState([]);
 
     // ESA-058: in useEffect add call to get games
-    const gameOptions = [
-        { name: 'PUBG' },
-        { name: 'BGMI' },
-        { name: 'COD' }
-    ];
+    // const gameOptions = [
+    //     { name: 'PUBG' },
+    //     { name: 'BGMI' },
+    //     { name: 'COD' }
+    // ];
     const eventTypeOptions = [{ name: 'FREE' }, { name: 'PAID' }];
+
+    const getAInterestedGamesForUser = async () => {
+        const response = await backendService.getInterestedGamesForUser(loggedInUser.email);
+        const filteredResponse = response.map(res => ({ name: res.gameName }));
+        setGameOptions(filteredResponse);
+    }
+
+    useEffect(() => {
+        getAInterestedGamesForUser();
+    }, []);
 
     const showForm = () => {
         showEventForm();
