@@ -46,6 +46,8 @@ export default function Events() {
         // ESA-058: should be uncommented
         if (response.length > 0) {
             setActiveOrgEvents(response);
+        } else {
+            setActiveOrgEvents([]);
         }
     }
 

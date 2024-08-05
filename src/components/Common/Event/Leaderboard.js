@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dropdown } from 'primereact/dropdown';
 import { RxCross2 } from "react-icons/rx";
 import "primereact/resources/themes/arya-blue/theme.css"
@@ -15,6 +15,7 @@ export default function Leaderboard(props) {
     const [file, setFile] = useState(null);
     const [isSubmit, setIsSubmit] = useState(false);
     const [disableUpload, setDisableUpload] = useState(false);
+    const [teamOptions, setTeamOptions] = useState([]);
 
     const toggleForm = () => {
         setShowForm(!showForm);
@@ -35,12 +36,17 @@ export default function Leaderboard(props) {
             setDisableUpload(true);
         }
     };
-    // ESA-058: in useEffect add call to get teams
-    const teamOptions = [
-        { name: 'first-team', id: 1 },
-        { name: 'second-team', id: 2 },
-        { name: 'third-team', id: 3 }
-    ];
+
+    const getTeamsWithIds = async () => {
+        const response = await backendService.getTeamsWithIds(props.eventId);
+        const mappedResponse = response.map((obj) => ({ name: obj.teamName, id: obj.teamID }));
+        setTeamOptions(mappedResponse);
+
+    }
+    useEffect(() => {
+        getTeamsWithIds();
+        // eslint-disable-next-line
+    }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
