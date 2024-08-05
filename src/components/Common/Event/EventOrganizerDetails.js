@@ -95,7 +95,7 @@ export default function EventOrganizerDetails() {
                         </button>
                     }
                     {
-                        !isLeaderboardComplete && eventOrganizerDetails.status === 'COMPLETED' && <div>
+                        !isLeaderboardComplete && eventOrganizerDetails.status === 'COMPLETED' && eventId && <div>
                             <Leaderboard eventId={eventId} />
                         </div>
                     }

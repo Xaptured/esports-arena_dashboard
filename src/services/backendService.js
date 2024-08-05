@@ -236,6 +236,19 @@ const backendService = {
         }
     },
 
+    async getTeamsWithIds(eventId) {
+        try {
+            const url = 'http://localhost:8086/events/get-teams-with-id?eventId=' + eventId;
+            const result = await fetch(url);
+
+            const jsonResult = await result.json();
+
+            return jsonResult;
+        } catch (error) {
+            console.log("Error while getting getTeamsWithCount", error);
+        }
+    },
+
     async updateTeam(team) {
         try {
             const result = await fetch('http://localhost:8086/events/save-team?isCreate=false&isUpdate=true', {
