@@ -126,6 +126,11 @@ export default function ConnectUs() {
                 setTimeout(() => {
                     setRegisterMessage('Thanks for joining our community');
                 }, 3000);
+            } else if (emailResult.message === 'Email already exist') {
+                setRegisterMessage('Email already exist');
+                setTimeout(() => {
+                    setRegisterMessage('Join our community for the exciting journey');
+                }, 5000);
             } else {
                 setRegisterMessage('Error occurred. Please try again later!');
                 setTimeout(() => {
@@ -151,6 +156,12 @@ export default function ConnectUs() {
             setLoginMessage('Please verify your account');
         } else if (result.message === 'Invalid access') {
             setLoginMessage('Invalid access');
+        } else if (result.message === 'User not found') {
+            setLoginMessage('Email ID does not exist');
+        } else if (result.message === 'Something went wrong. Please try again later') {
+            setLoginMessage('Something went wrong. Please try again later');
+        } else if (result.message === 'Bad credentials') {
+            setLoginMessage('Password is incorrect');
         } else {
             if (result.role === 'PARTICIPANT') {
                 setLoginMessage('Logged in as PARTICIPANT');
