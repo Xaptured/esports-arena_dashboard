@@ -40,7 +40,14 @@ export default function TeamCard(props) {
                 }
             </div>
             {
-                props.type === 'PAID' && (
+                props.type === 'PAID' && props.isApproved && (
+                    <div className='confirm-message-space'>
+                        Approved
+                    </div>
+                )
+            }
+            {
+                props.type === 'PAID' && !props.isApproved && (
                     showButton ?
                         <div className="action-bar-leaderboard">
                             <button className='btn btn-outline-light button_event_form' onClick={handleApprove}>Approve</button>
