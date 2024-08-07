@@ -84,7 +84,7 @@ export default function EventOrganizerDetails() {
                                 }
                                 {
                                     teamDetailsList && teamDetailsList.length > 0 && teamDetailsList.map((teamDetails) => (
-                                        <TeamCard teamName={teamDetails.teamName} count={teamDetails.remainingPlayers} type={eventOrganizerDetails.type} isApproved={teamDetails.isApproved} />
+                                        <TeamCard teamName={teamDetails.teamName} count={teamDetails.remainingPlayers} type={eventOrganizerDetails.type} isApproved={teamDetails.approved} />
                                     ))
                                 }
                             </div>)

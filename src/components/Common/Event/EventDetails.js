@@ -290,7 +290,10 @@ export default function EventDetails() {
                                             </div>
                                             <h1>Join a team</h1>
                                             {
-                                                teamDetailsList && teamDetailsList.map((teamDetails) => (
+                                                teamDetailsList && teamDetailsList.length === 0 && <p className="confirm-message-space">No teams to join right now.</p>
+                                            }
+                                            {
+                                                teamDetailsList && teamDetailsList.length > 0 && teamDetailsList.map((teamDetails) => (
                                                     teamDetails.remainingPlayers > 0 && <JoinTeamCard teamName={teamDetails.teamName} count={teamDetails.remainingPlayers} registered={setRegistered} />
                                                 ))
                                             }

@@ -232,6 +232,13 @@ h1.event-name-content {
 
 .join-team-container {
   margin-top: 5%;
+  background: transparent;
+  border: 3px solid white;
+  backdrop-filter: blur(2px);
+  color: #fff;
+  border-radius: 12px;
+  padding: 6% 4%;
+  transition: all 0.3s ease-in-out;
 }
 
 .join-team-container h1 {
