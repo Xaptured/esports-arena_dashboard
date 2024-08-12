@@ -313,7 +313,10 @@ export default function EventDetails() {
                                                 <h1>Participants</h1>
                                                 <div className="participant-content-container">
                                                     {
-                                                        teamDetails && teamDetails.map((details) => (
+                                                        teamDetails && teamDetails.length === 0 && <p className='error-message-space'>Create or Join team with your registered email to see participants.</p>
+                                                    }
+                                                    {
+                                                        teamDetails && teamDetails.length > 0 && teamDetails.map((details) => (
                                                             <div className='participant-content'>
                                                                 <div className='participant-content-username'>{details.name}</div>
                                                                 <div className='participant-content-email'>{details.email}</div>
@@ -322,13 +325,13 @@ export default function EventDetails() {
                                                     }
                                                 </div>
                                                 {
-                                                    countLeft > 1 && <div className='error-message-space'>{countLeft} slots left</div>
+                                                    teamDetails && teamDetails.length > 0 && countLeft > 1 && <div className='error-message-space'>{countLeft} slots left</div>
                                                 }
                                                 {
-                                                    countLeft === 1 && <div className='error-message-space'>{countLeft} slot left</div>
+                                                    teamDetails && teamDetails.length > 0 && countLeft === 1 && <div className='error-message-space'>{countLeft} slot left</div>
                                                 }
                                                 {
-                                                    countLeft < 1 && <div className='error-message-space'>No slots left</div>
+                                                    teamDetails && teamDetails.length > 0 && countLeft < 1 && <div className='error-message-space'>No slots left</div>
                                                 }
                                             </div>
                                         </div>
