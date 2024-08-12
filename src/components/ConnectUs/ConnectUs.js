@@ -112,6 +112,9 @@ export default function ConnectUs() {
             }
             const emailResult = await backendService.sendVerificationEmail(emailRequest);
             setLoading(false);
+            setTimeout(() => {
+                switchToRegistration();
+            }, 5);
             const newCredentialObject = {
                 email: '',
                 password: '',
