@@ -9,8 +9,8 @@ export default function YourPlacePage(props) {
                 <MainContent
                     leftHeading='Participants'
                     rightHeading='Organizers'
-                    leftBody='Lorem ipsum dolor sit amet, consecteturLorem ipsum dolor sit amet, consecteturLorem ipsum dolor sit amet, consecteturLorem ipsum dolor sit amet, consecteturLorem ipsum dolor sit amet, consectetur'
-                    rightBody='Lorem ipsum dolor sit amet, consecteturLorem ipsum dolor sit amet, consecteturLorem ipsum dolor sit amet, consecteturLorem ipsum dolor sit amet, consecteturLorem ipsum dolor sit amet, consectetur'
+                    leftBody='Participants are the heart of the competition, signing up to showcase their gaming skills in various events. They engage in intense matches, aiming for victory and the glory of being the best.'
+                    rightBody='Organizers are the masterminds behind the action, creating and managing exciting gaming events. They set the rules, manage participants, and ensure a thrilling experience for everyone involved.'
                     isLeftAlignForLeft={true}
                     isButtonVisible={true}
                     button='Contact Us'
