@@ -35,7 +35,7 @@
   border: 3px solid white;
   backdrop-filter: blur(12px);
   color: #fff;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 8% 7%;
 }
 
@@ -156,4 +156,26 @@
 .scrollable-container::-webkit-scrollbar-track {
   background-color: #7f7878;
   border-radius: 8px;
+}
+
+.faq-header {
+  margin-bottom: 10%;
+}
+
+.faq-content {
+  font-family: "FontOne", sans-serif;
+}
+
+.faq-content .question {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 1%;
+}
+
+.faq-content .answer {
+  font-size: 20px;
+  font-weight: 100;
+  color: #7f7878;
+  margin-bottom: 10%;
+  padding: 2%;
 }
