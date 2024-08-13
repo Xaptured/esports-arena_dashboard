@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './subcontent.css'
+import Modal from './Modal';
 
 export default function SubContent(props) {
 
     const { heading, body, isButtonVisible, isLeftAlign, button } = props;
+    const [showModal, setShowModal] = useState(false);
+
+    const toggleModal = () => setShowModal(!showModal);
 
     return (
         <div className='subcontent-container'>
@@ -33,11 +37,14 @@ export default function SubContent(props) {
             </div>
             {
                 isButtonVisible ?
-                    <button type="submit" className='btn btn-outline-light btn-lg subcontent_button'>
+                    <button type="submit" className='btn btn-outline-light btn-lg subcontent_button' onClick={toggleModal}>
                         {button}
                     </button>
                     :
                     ''
+            }
+            {
+                showModal && <Modal toggleModal={toggleModal} />
             }
         </div>
     )
