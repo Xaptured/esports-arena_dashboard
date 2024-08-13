@@ -7,6 +7,7 @@ import { useCopyValueAtom } from '../../atoms/loginDataAtom';
 import { loggedInUserAtom, loggedInUserAtomCopy } from '../../atoms/loginDataAtom';
 import SyncLoader from 'react-spinners/SyncLoader';
 import HashLoader from 'react-spinners/HashLoader';
+import { FAQs } from '../../constants/FAQ';
 
 export default function Help() {
     const initialComments = {
@@ -152,9 +153,18 @@ export default function Help() {
                 </div>
                 <div className='help-content-middle'>
                     <div className="wrapper">
-                        <div className="form-box">
-                            <h1>F A Q</h1>
-                            {/* prepare questions and answers */}
+                        <div className='scrollable-container form-box'>
+                            <h1 className='faq-header'>F A Q</h1>
+                            {
+                                FAQs.map((faq) =>
+                                (
+                                    <div className='faq-content'>
+                                        <p className='question'>{faq.question}</p>
+                                        <p className='answer'>{faq.answer}</p>
+                                    </div>
+                                )
+                                )
+                            }
                         </div>
                     </div>
                 </div>
