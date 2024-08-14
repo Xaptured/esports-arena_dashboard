@@ -8,6 +8,8 @@ import { loggedInUserAtom, loggedInUserAtomCopy } from '../../atoms/loginDataAto
 import SyncLoader from 'react-spinners/SyncLoader';
 import HashLoader from 'react-spinners/HashLoader';
 import { FAQs } from '../../constants/FAQ';
+import "aos/dist/aos.css";
+import Aos from 'aos';
 
 export default function Help() {
     const initialComments = {
@@ -122,11 +124,15 @@ export default function Help() {
         getVideoDetails(loggedInUser.email);
     }, []);
 
+    useEffect(() => {
+        Aos.init({ duration: 1500 });
+    }, []);
+
 
     return (
         <div className='container help-container'>
             <div className='help-content'>
-                <div className='help-content-left'>
+                <div className='help-content-left' data-aos="flip-right">
                     {
                         videos.length === 0 && (
                             <div className=''>
@@ -151,7 +157,7 @@ export default function Help() {
                         )
                     }
                 </div>
-                <div className='help-content-middle'>
+                <div className='help-content-middle' data-aos="flip-up">
                     <div className="wrapper">
                         <div className='scrollable-container form-box'>
                             <h1 className='faq-header'>F A Q</h1>
@@ -168,7 +174,7 @@ export default function Help() {
                         </div>
                     </div>
                 </div>
-                <div className='help-content-right'>
+                <div className='help-content-right' data-aos="flip-left">
                     <div className="wrapper">
                         <div className="form-box">
                             <form onSubmit={handleSubmitComments}>

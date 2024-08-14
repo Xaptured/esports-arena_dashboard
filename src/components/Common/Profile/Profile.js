@@ -8,6 +8,8 @@ import backendService from '../../../services/backendService';
 import { profileStatusAtom } from '../../../atoms/loginDataAtom'
 import { useCopyValueAtom } from '../../../atoms/loginDataAtom';
 import SyncLoader from 'react-spinners/SyncLoader';
+import "aos/dist/aos.css";
+import Aos from 'aos';
 
 export default function Profile() {
 
@@ -100,17 +102,19 @@ export default function Profile() {
         getActiveGames();
     }, []);
 
-
+    useEffect(() => {
+        Aos.init({ duration: 1500 });
+    }, []);
     return (
         <div className='container profile-container'>
             <div className='profile-content'>
-                <div className='profile-desciption'>
+                <div className='profile-desciption' data-aos='fade-right'>
                     Your details will help us to provide you better experience.
                     <br />
                     <p style={{ fontSize: '25px', color: 'grey', marginTop: '5%' }}>Please complete your profile to start your exciting journey.</p>
                     <LiaLongArrowAltRightSolid size={200} />
                 </div>
-                <div className='profile-form'>
+                <div className='profile-form' data-aos='fade-left'>
                     <div className="form-box-profile">
                         <form onSubmit={handleSubmit}>
                             <h1>Profile</h1>

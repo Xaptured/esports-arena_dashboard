@@ -9,6 +9,8 @@ import { USERS, loggedInUserAtom, loggedInUserAtomCopy } from '../../../atoms/lo
 import backendService from '../../../services/backendService'
 import { useCopyValueAtom } from '../../../atoms/loginDataAtom';
 import EventOrganizerDetails from './EventOrganizerDetails';
+import "aos/dist/aos.css";
+import Aos from 'aos';
 import EventForm from './EventForm';
 
 export default function Events() {
@@ -62,10 +64,14 @@ export default function Events() {
             getAllUpcomingOrganizerEvents();
         }
     }, []);
+
+    useEffect(() => {
+        Aos.init({ duration: 1500 });
+    }, []);
     return (
         <div className='container event-container'>
             <div className='event-content'>
-                <div className='event-content-left'>
+                <div className='event-content-left' data-aos="fade-right">
                     {
                         loggedInUser.userType === USERS.PARTICIPANT && activeEvents.length === 0 && (
                             <p className='event-content-left-no-content'>There are no events which matches your interest. Please wait for some time to get started.</p>
@@ -95,7 +101,7 @@ export default function Events() {
                     }
 
                 </div>
-                <div className='event-content-right'>
+                <div className='event-content-right' data-aos="fade-left">
                     {
                         loggedInUser.userType === USERS.PARTICIPANT && (eventDetails ?
                             <EventDetails />
