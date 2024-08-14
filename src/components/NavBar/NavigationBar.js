@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './navigationbar.css';
 import {
     participantNavElements, organizerNavElements, adminNavElements
@@ -7,6 +7,8 @@ import { useAtomValue, useAtom } from 'jotai';
 import { activeAdminTabsAtom, activeOrganizerTabsAtom, activeParticipantTabsAtom } from '../../atoms/activeTabsAtom';
 import { USERS, loggedInUserAtom, loggedInUserAtomCopy } from '../../atoms/loginDataAtom';
 import { useCopyValueAtom } from '../../atoms/loginDataAtom';
+import "aos/dist/aos.css";
+import Aos from 'aos';
 
 export default function NavigationBar() {
 
@@ -45,11 +47,15 @@ export default function NavigationBar() {
             setAdminTabs(activeTabsArray);
         }
     }
+
+    useEffect(() => {
+        Aos.init({ duration: 1500 });
+    }, []);
     return (
         <div>
             <nav className="navbar navbar-expand-lg sticky-top pt-4 pb-4">
                 <div className="container-fluid">
-                    <p className="logoName">
+                    <p className="logoName" data-aos="fade-down">
                         ESportsArena
                     </p>
                     <button
@@ -68,18 +74,18 @@ export default function NavigationBar() {
                             {
                                 loginData.userType === USERS.PARTICIPANT ?
                                     (participantNavElements.map((element, index) =>
-                                        <li key={index} className="nav-item ms-5 px-3" onClick={() => setCurrentComponent(index)}>
+                                        <li key={index} className="nav-item ms-5 px-3" onClick={() => setCurrentComponent(index)} data-aos="fade-down">
                                             {element}
                                         </li>)
                                     )
                                     :
                                     loginData.userType === USERS.ORGANIZER ? (organizerNavElements.map((element, index) =>
-                                        <li key={index} className="nav-item ms-5 px-3" onClick={() => setCurrentComponent(index)}>
+                                        <li key={index} className="nav-item ms-5 px-3" onClick={() => setCurrentComponent(index)} data-aos="fade-down">
                                             {element}
                                         </li>))
                                         :
                                         (adminNavElements.map((element, index) =>
-                                            <li key={index} className="nav-item ms-5 px-3" onClick={() => setCurrentComponent(index)}>
+                                            <li key={index} className="nav-item ms-5 px-3" onClick={() => setCurrentComponent(index)} data-aos="fade-down">
                                                 {element}
                                             </li>)
                                         )

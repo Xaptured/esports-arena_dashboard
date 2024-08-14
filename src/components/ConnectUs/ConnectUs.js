@@ -1,10 +1,12 @@
 import { useSetAtom, useAtomValue } from 'jotai';
 import backendService from '../../services/backendService';
 import './connectus.css'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { USERS, loggedInUserAtom, loggedInUserAtomCopy } from '../../atoms/loginDataAtom';
 import { useCopyValueAtom } from '../../atoms/loginDataAtom';
 import SyncLoader from 'react-spinners/SyncLoader';
+import "aos/dist/aos.css";
+import Aos from 'aos';
 
 export default function ConnectUs() {
     // ESA-058-START
@@ -17,6 +19,9 @@ export default function ConnectUs() {
     }
     // ESA-058-END
     const setLoginData = useSetAtom(loggedInUserAtomResult);
+    useEffect(() => {
+        Aos.init({ duration: 1500 });
+    }, []);
 
     const initialCredentials = {
         email: '',
@@ -276,7 +281,7 @@ export default function ConnectUs() {
             {/* Forms Container -> Login/Registration Form and Contact Us Form*/}
             <div className="forms-container-flex">
                 {/* Wrapper for login/registration form */}
-                <div className="wrapper">
+                <div className="wrapper" data-aos='zoom-out'>
                     <div className="form-box">
                         <form onSubmit={handleSubmit}>
                             <h1 className='login-register-container'>
@@ -370,7 +375,7 @@ export default function ConnectUs() {
                     </div>
                 </div>
                 {/* Wrapper for contact us form */}
-                <div className="wrapper">
+                <div className="wrapper" data-aos='zoom-out'>
                     <div className="form-box">
                         <form onSubmit={handleSubmitComments}>
                             <h1>Contact me</h1>

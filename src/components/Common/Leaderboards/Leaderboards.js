@@ -8,6 +8,8 @@ import { USERS, loggedInUserAtom, loggedInUserAtomCopy } from '../../../atoms/lo
 import LeaderboardEventCard from './LeaderboardEventCard';
 import LeaderboardEventDetails from './LeaderboardEventDetails';
 import backendService from '../../../services/backendService'
+import "aos/dist/aos.css";
+import Aos from 'aos';
 
 
 export default function Leaderboards() {
@@ -53,10 +55,13 @@ export default function Leaderboards() {
             findAllLeaderboardCompleteOrganizerEvents();
         }
     }, []);
+    useEffect(() => {
+        Aos.init({ duration: 1500 });
+    }, []);
     return (
         <div className='container leaderboard-tab-container'>
             <div className='leaaderboard-content'>
-                <div className='leaderboard-content-left'>
+                <div className='leaderboard-content-left' data-aos="fade-right">
                     {
                         loggedInUser.userType === USERS.PARTICIPANT && inctiveEvents && inctiveEvents.length === 0 && (
                             <p className='event-content-left-no-content'>Currently there are no events to show up here.</p>
@@ -84,7 +89,7 @@ export default function Leaderboards() {
                         )
                     }
                 </div>
-                <div className='leaderboard-content-right'>
+                <div className='leaderboard-content-right' data-aos="fade-left">
                     {
                         loggedInUser.userType === USERS.PARTICIPANT && (eventDetails ?
                             <LeaderboardEventDetails />

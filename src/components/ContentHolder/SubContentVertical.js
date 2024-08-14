@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './subcontentvertical.css'
+import "aos/dist/aos.css";
+import Aos from 'aos';
 
 export default function SubContentVertical(props) {
 
     const { heading, body, isButtonVisible, isLeftAlign, button } = props;
+    useEffect(() => {
+        Aos.init({ duration: 1500 });
+    }, []);
     return (
         <>
-            <div className='vertical-container'>
+            <div className='vertical-container' data-aos='zoom-in'>
                 {
                     isLeftAlign ?
                         <div className='left_align_container'>
