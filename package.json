@@ -14,7 +14,7 @@
     "aos": "^2.3.4",
     "primereact": "^10.5.1",
     "react": "^18.3.1",
-    "react-dom": "^18.2.0",
+    "react-dom": "^18.3.1",
     "react-icons": "^4.12.0",
     "react-loader-spinner": "^6.1.6",
     "react-router-dom": "^6.26.1",
