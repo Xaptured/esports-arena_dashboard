@@ -1,6 +1,12 @@
+# ESports-Arena
+
+### This is an event management app specially designed for Online ESports.
+
 ![Static Badge](https://img.shields.io/badge/react_version-18.2.0-green)
 
 [![Build and Test Badge](https://github.com/Xaptured/esports-arena_dashboard/actions/workflows/build-and-test.yml/badge.svg?job=building-one)](https://github.com/Xaptured/esports-arena_dashboard/actions/workflows/build-and-test.yml)
+
+[![Dependabot Updates](https://github.com/Xaptured/esports-arena_dashboard/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/Xaptured/esports-arena_dashboard/actions/workflows/dependabot/dependabot-updates)
 
 # Getting Started with Create React App
 
