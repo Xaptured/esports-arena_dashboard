@@ -1,8 +1,10 @@
 version: 2
 updates:
   - package-ecosystem: npm
-    directory: "/"
+    directory: '/'
     schedule:
-      interval: "daily"
+      interval: 'weekly'
     labels:
-      - 'dependenncies :package:'
+      - 'dependencies :package:'
+      - 'version bump'
+      - 'automated'
