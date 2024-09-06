@@ -10,7 +10,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "jotai": "^2.6.1",
-    "primeicons": "^6.0.1",
+    "primeicons": "^7.0.0",
     "aos": "^2.3.4",
     "primereact": "^10.5.1",
     "react": "^18.2.0",
