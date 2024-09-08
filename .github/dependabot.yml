@@ -5,6 +5,6 @@ updates:
     schedule:
       interval: 'weekly'
     labels:
-      - 'dependencies :package:'
-      - 'version bump'
-      - 'automated'
+      - dependencies 📦
+      - version bump
+      - automated
